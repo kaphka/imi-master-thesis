@@ -1,0 +1,23 @@
+name: master
+channels:
+- conda-forge
+- defaults
+dependencies:
+- numpy
+- pandas
+- dask
+- ipython
+- tqdm
+- glymur
+- toolz
+- scikit-image
+- wget
+- beautifulsoup4
+- scipy
+- nomkl
+- pytest
+- pytorch
+- cuda91
+- pip:
+  - internetarchive
+  - http://download.pytorch.org/whl/cu91/torch-0.3.1-cp36-cp36m-linux_x86_64.whl 
