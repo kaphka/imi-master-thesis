@@ -20,3 +20,15 @@
 \fancyhead[RO]{\smallcaps{\newlinetospace{\@chapterauthor}}\quad\thepage}%
 }
 \makeatother
+
+% numberings
+\setcounter{secnumdepth}{1}
+\setcounter{tocdepth}{1}
+
+\usepackage{titlesec}
+\titleformat{\chapter}% reformat chapter headings
+     [hang]% like section, with number on same line
+     {\huge}% formatting applied to whole
+     {\thechapter}% Chapter number
+     {0.5em}% space between # and title
+     {}% formatting applied just to title

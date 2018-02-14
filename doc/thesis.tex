@@ -1,0 +1,79 @@
+%!TEX program = xelatex
+\documentclass[nobib, nohyper, a4paper, notoc, sfsidenotes,  twoside]{tufte-book}
+    \XeTeXinputnormalization=1
+\usepackage[babel,german=quotes]{csquotes}
+\usepackage{polyglossia}
+\usepackage[xetex,
+            bookmarks=true,
+            colorlinks=true,
+            linktoc=section,
+            pdfauthor={Your Name},
+            pdftitle={The Title},
+            pdfsubject={The Subject},
+            pdfkeywords={Some Keywords},
+            ]{hyperref}
+\usepackage{booktabs}
+\usepackage{svg}
+\usepackage{amsmath}
+\usepackage{xcolor,listings}
+\include{include/listings}
+\include{include/tuftefix}
+\usepackage[caption=false]{subfig}
+
+\usepackage{blindtext}
+
+
+
+\setdefaultlanguage[spelling=new,babelshorthands=true]{german}
+\setotherlanguage[]{english}
+
+
+
+\usepackage{fontspec}
+\usepackage[parfill]{parskip}
+\setlength{\parindent}{0pt}
+
+\setromanfont[Mapping=tex-text]{Linux Biolinum}
+\setsansfont[Mapping=tex-text]{Gill Sans}
+\setmonofont[Mapping=tex-text,Scale=0.8]{Droid Sans Mono}
+\newfontfamily{\sym}{Font Awesome 5 Pro Regular}
+%\newfontfamily{\sym}{Linux Biolinum}
+%\newcommand*{\sym}{\fontfamily{FontAwesome}\selectfont}
+\usepackage{scrextend}
+\addtokomafont{labelinglabel}{\sffamily}
+
+\usepackage{graphicx}
+\usepackage[
+    % sorting=nyt,
+    % style=alphabetic,
+    % citestyle=alphabetic,
+    % bibstyle=authoryear,
+    % % natbib=true,
+    style=alphabetic,
+    % autocite=footnote,
+    backend=biber
+    ]{biblatex}
+\addbibresource{bibliography/all.bib}
+
+
+
+\usepackage{cleveref}
+\captionsetup[subfigure]{subrefformat=simple,labelformat=simple}
+\renewcommand\thesubfigure{(\alph{subfigure})}
+
+\include{titlepage}
+
+%layout
+% \usepackage{showframe}
+\usepackage{layouts}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\include{main}
+
+
+\printbibliography[heading=bibintoc, title={Literaturverzeichnis}]\clearpage
+% \printbibliography[heading=bibintoc, keyword={online}, title={Onlinequellen}]\clearpage
+% \printbibliography[heading=bibintoc, keyword={image}, title={Bildquellen}]\clearpage
+\end{document}
