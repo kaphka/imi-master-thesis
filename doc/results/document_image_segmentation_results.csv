@@ -1,0 +1,40 @@
+dataset,citekey,name,pixelacc,FgPA,meanacc,meanIU,fwIU
+CB55,,CRF [18],84,,53,42,75
+CB55,chen_page_2014,CNN,86,,59,47,77
+CB55,chen_page_2014,CNN (max pooling),86,,60,48,77
+CB55,alberti_historical_2017,LDA(trained),,,,59,
+CB55,alberti_historical_2017,RND(trained),,,,48,
+CB55,wick_fully_2017,FCN,,,,,
+CB55,wick_fully_2017,FCN (Post-processed),,,,,
+CSG18,,CRF [18],86,,47,37,77
+CSG18,chen_page_2014,CNN,87,,53,41,79
+CSG18,chen_page_2014,CNN (max pooling),87,,53,42,80
+CSG18,alberti_historical_2017,LDA(trained),,,,62,
+CSG18,alberti_historical_2017,RND(trained),,,,48,
+CSG18,wick_fully_2017,FCN,,,,,
+CSG18,wick_fully_2017,FCN (Post-processed),,,,,
+CSG863,,CRF [18],86,,51,42,78
+CSG863,chen_page_2014,CNN,87,,58,45,79
+CSG863,chen_page_2014,CNN (max pooling),87,,57,45,79
+CSG863,alberti_historical_2017,LDA(trained),,,,60,
+CSG863,alberti_historical_2017,RND(trained),,,,44,
+CSG863,wick_fully_2017,FCN,,,,,
+CSG863,wick_fully_2017,FCN (Post-processed),,,,,
+G. Washington,chen_page_2014,CNN,91,,91,77,86
+G. Washington,chen_page_2014,CNN (max pooling),91,,90,77,86
+G. Washington,alberti_historical_2017,LDA(trained),,,,,
+G. Washington,alberti_historical_2017,RND(trained),,,,,
+G. Washington,wick_fully_2017,FCN,92.1,93.53 ± 0.66,,,
+G. Washington,wick_fully_2017,FCN (Post-processed),,93.7 ± 1.1,,,
+Parzival,chen_page_2014,CNN,94,,75,68,89
+Parzival,chen_page_2014,CNN (max pooling),94,,75,68,89
+Parzival,alberti_historical_2017,LDA(trained),,,,,
+Parzival,alberti_historical_2017,RND(trained),,,,,
+Parzival,wick_fully_2017,FCN,93.6, 96.75 ± 0.47,,,
+Parzival,wick_fully_2017,FCN (Post-processed),,97.33 ± 0.49,,,
+St.Gall,chen_page_2014,CNN,98,,90,87,96
+St.Gall,chen_page_2014,CNN (max pooling),98,,90,87,96
+St.Gall,alberti_historical_2017,LDA(trained),,,,,
+St.Gall,alberti_historical_2017,RND(trained),,,,,
+St.Gall,wick_fully_2017,FCN,98.4,96.39 ± 0.35,,,
+St.Gall,wick_fully_2017,FCN (Post-processed),,97.67 ± 0.39,,,

@@ -3,9 +3,23 @@ Das ist ein Text
 
 \chapter{Selbstüberwachtes Lernen}
 
-\begin{figure}
-    \includegraphics[]{figures/graphs/exp.pdf} 
-    \caption{Image}
-  \end{figure}
+% \begin{figure}
+%     \includegraphics[]{figures/graphs/exp.pdf} 
+%     \caption{Image}
+%   \end{figure}
 
 \chapter{Umsetzung}
+
+\section{Evaluierung}
+
+% \csvautotabular{results/DIVA-HisDB.csv}
+CB55					CSG18					CSG863
+
+\begin
+{tabular}{|l|r|r|r|rr}\hline%
+Dataset &\pixelacc	&\FgPA	&\meanacc	&\meanIU	&\fwIU \\\hline\hline
+\csvreader[head to column names]{results/DIVA-HisDB.csv}{}%
+{\\ \dataset 	\name	&\pixelacc	&\FgPA	&\meanacc	&\meanIU	&\fwIU }
+\\\hline
+\end
+{tabular}
