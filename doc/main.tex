@@ -13,13 +13,17 @@ Das ist ein Text
 \section{Evaluierung}
 
 % \csvautotabular{results/DIVA-HisDB.csv}
-CB55					CSG18					CSG863
 
-\begin
-{tabular}{|l|r|r|r|rr}\hline%
-Dataset &\pixelacc	&\FgPA	&\meanacc	&\meanIU	&\fwIU \\\hline\hline
-\csvreader[head to column names]{results/DIVA-HisDB.csv}{}%
-{\\ \dataset 	\name	&\pixelacc	&\FgPA	&\meanacc	&\meanIU	&\fwIU }
-\\\hline
-\end
-{tabular}
+\newcommand{\resulttable}[2]{
+    \begin{tabular}{l|r|r|r|r|r}%
+        \hline
+        \csvreader[head to column names, filter equal={\dataset}{#1}]{results/document_image_segmentation_results.csv}{}%
+        {#2}
+        \\\hline
+        \end
+        {tabular}
+}
+
+\resulttable{CB55}{\\ \name & \pixelacc & \FgPA & \meanacc & \meanIU & \fwIU}
+\resulttable{CSG18}{\\  \pixelacc & \FgPA & \meanacc & \meanIU & \fwIU}
+\resulttable{CSG863}{\\  \pixelacc & \FgPA & \meanacc & \meanIU & \fwIU}
