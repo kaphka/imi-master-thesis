@@ -16,8 +16,8 @@ dependencies:
 - scipy
 - nomkl
 - pytest
-- pytorch
-- cuda91
 - pip:
   - internetarchive
-  - http://download.pytorch.org/whl/cu91/torch-0.3.1-cp36-cp36m-linux_x86_64.whl 
+  - pillow-simd
+  - http://download.pytorch.org/whl/cu90/torch-0.3.1-cp36-cp36m-linux_x86_64.whl 
+  - torchvision
