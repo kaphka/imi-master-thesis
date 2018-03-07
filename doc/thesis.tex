@@ -32,7 +32,7 @@
 
 \usepackage{fontspec}
 \usepackage[parfill]{parskip}
-\setlength{\parindent}{0pt}
+% \setlength{\parindent}{0pt}
 
 \setromanfont[Mapping=tex-text]{Linux Biolinum}
 \setsansfont[Mapping=tex-text]{Gill Sans}
@@ -46,13 +46,14 @@
 \usepackage{graphicx}
 \usepackage[
     % sorting=nyt,
-    % style=alphabetic,
-    % citestyle=alphabetic,
+    isbn=false,
+    style=authoryear-icomp,
+    % citestyle=authoryear,
     % bibstyle=authoryear,
     % % natbib=true,
-    style=alphabetic,
     % autocite=footnote,
-    backend=biber
+    backend=biber,
+    date=short
     ]{biblatex}
 \addbibresource{bibliography/all.bib}
 
@@ -68,6 +69,7 @@
 % \usepackage{showframe}
 \usepackage{layouts}
 
+\author{Jakob Schmolling}
 
 \begin{document}
 % \maketitle
@@ -79,4 +81,15 @@
 \printbibliography[heading=bibintoc, title={Literaturverzeichnis}]\clearpage
 % \printbibliography[heading=bibintoc, keyword={online}, title={Onlinequellen}]\clearpage
 % \printbibliography[heading=bibintoc, keyword={image}, title={Bildquellen}]\clearpage
+
+\pagebreak
+\section*{Eidesstattliche Erklärung}
+Hiermit versichere ich, dass ich die vorliegende Arbeit selbstständig verfasst und keine ande- ren als die angegebenen Hilfsmittel benutzt habe. Alle aus fremden Quellen im Wortlaut oder dem Sinn nach entnommenen Aussagen sind durch Angaben der Herkunft kenntlich gemacht.
+Die Arbeit wurde bisher in gleicher oder ähnlicher Form keiner anderen Prüfungskommissi- on vorgelegt und auch nicht veröffentlicht.
+
+\vspace{3cm}
+\parbox{4cm}{\centering \hrule\strut \centering\footnotesize Ort, Datum} 
+\hfill
+\parbox{4cm}{\hrule\strut \centering\footnotesize Unterzeichner}
+
 \end{document}
