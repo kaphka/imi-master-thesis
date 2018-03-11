@@ -8,6 +8,7 @@ Bereich der Dokumenten-Digitaliserung.
 
 \cref{chap:selfsupervised} erläuter die Methode des selbstüberwachten Lernen. Die Methode wird auf die reproduzierten Forschungen angewendet.
 
+%-------------------------------------------------------------------------------
 \chapter{Digtalisierten Dokumente}
 \label{chap:documents}
 % Warum scannt man Dokumente
@@ -28,7 +29,6 @@ Zum anderen bestehen Dokumente auch aus Inhalten die semantische Bedeutung haben
 Zeichenkette codiert werden können. 
 Zum Beispiel Textboxen.
 
-
 \section{Schritte in der Verarbeitung von Dokumentenbildern}
 Die Dokumentensegmetierung ist ein Vorverarbeitungsschritt für weitere Schritte der Dokumentenverarbeitung.
 Eine typische Aufgabe ist die Erkennung des Leseflüsses.
@@ -37,6 +37,7 @@ Im Bereich der Bibliotheswissenschaften besteht ein großes Interesse an Klassif
 Buchseiten zur besseren Erschließung.
 \cite{mcconnaughey_labeled_2017} klassifizieren Buchseiten anhand von textbasierten Features in 4 Kategorien. 
 Flow
+
 \section{Auswahl und Beschreibung der Datensätze}
 \textcite[985\psqq]{doermann_datasets_2014} listen 5 Aspekte die bei der Erstellung von Datensätzen zu beachten sind:
 Auswahl der Daten
@@ -46,24 +47,36 @@ Ground Trouth Annotation
 Speicherformat
 Struktur und Organisation
 
+\section{Bildverarbeitung mittels Neuronaler Netzwerke}
+
+\section{CNN}
+
+%-------------------------------------------------------------------------------
 \chapter{Reproduktion bisheriger Ergebnisse}
 \label{chap:reproduktion}
 
-\section{Umsetzung}
-Automatische Differenzierung
+
+Differenzierung
 
 \section{PyTorch}
+% Genauer klären
+PyTorch ist ein Framework zur automatischen Differenzierung von skaler Funktion \autocite{paszke_automatic_2017}.
 
 \section{Dokumentensegmetierung mittels CNN}
-1. Ansatz von \textcite{chen_convolutional_2017}
+
+
+\section{\textcite{chen_page_2016}}
 Superpixel segmentierung
 Klassifizierung auf Superpixel statt Pixelebene.
 
-2. Ansatz von \autocite{wick_fully_2017}
+\section{\textcite{wick_fully_2017}}
+
+\section{\textcite{alberti_historical_2017}}
 
 \section{SLIC Superpixel}
 \cite{achanta_slic_2010}
 
+%-------------------------------------------------------------------------------
 \chapter{Selbstüberwachtes Lernen}
 \label{chap:selfsupervised}
 
@@ -73,33 +86,29 @@ Jigsaw
 %     \includegraphics[]{figures/graphs/exp.pdf} 
 %     \caption{Image}
 %   \end{figure}
-
+%-------------------------------------------------------------------------------
 \chapter{Umsetzung}
 
 \section{Evaluierung}
 
-\begin{figure}
-    \includegraphics[]{figures/tasks/DIBCO2013-dataset.pdf} 
-    \caption{DIBCO2013 Dateset Beispiel}
-\end{figure}
+\sfigure{Beispiel aus dem DIBCO2013-Dateset}{figures/tasks/DIBCO2013-dataset.pdf}
 
 \subsection{Metriken}
 Die Evaluierung der Ergebnisse der Segmentierung erfolgt auf Pixelebene.
 \cite{long_fully_2015} berechnet 4 Metriken.
 Sei \(n_{ij}\) die Anzahl der Pixel der Klasse \(i\) die der Klasse \(j\) zugeordnet wurden.
 
-% \csvautotabular{results/DIVA-HisDB.csv}
 
-\newcommand{\resulttable}[2]{
+\newcommand{\resulttable}[3]{
     \begin{tabular}{l|r|r|r|r|r}%
-        \hline
-        \csvreader[head to column names, filter equal={\dataset}{#1}]{results/document_image_segmentation_results.csv}{}%
-        {#2}
+    \hline
+        \csvreader[head to column names, filter equal={\dataset}{#2}]{#1}{}%
+        {#3}
         \\\hline
-        \end
-        {tabular}
+        \end{tabular}
 }
 
-\resulttable{CB55}{\\ \name & \pixelacc & \FgPA & \meanacc & \meanIU & \fwIU}
-\resulttable{CSG18}{\\  \pixelacc & \FgPA & \meanacc & \meanIU & \fwIU}
-\resulttable{CSG863}{\\  \pixelacc & \FgPA & \meanacc & \meanIU & \fwIU}
+\resulttable{results/document_image_segmentation_results.csv}{CB55}{\\ \name & \pixelacc & \FgPA & \meanacc & \meanIU & \fwIU}
+\resulttable{results/document_image_segmentation_results.csv}{CSG18}{\\  \pixelacc & \FgPA & \meanacc & \meanIU & \fwIU}
+\resulttable{results/document_image_segmentation_results.csv}{CSG863}{\\  \pixelacc & \FgPA & \meanacc & \meanIU & \fwIU}
+
