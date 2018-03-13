@@ -1,0 +1,4 @@
+name,train,validate,test,comp,width,height
+CB55,20,10,10,10,4872,6496
+CSG18,20,10,10,10,3328,4992
+CSG863,20,10,10,10,3328,4992

@@ -1,15 +1,17 @@
+
+
 \section*{Einleitung}
 Diese Arbeit beschäftigt sich mit der Layout-Segmentierung von Digtalisierten Dokumenten mittels Neuronaler Netzwerke.
 
 \cref{chap:documents} beschreibt die Motivation für die Dokumentensegmetierung und aktuelle Entwicklungen im
 Bereich der Dokumenten-Digitaliserung.
 
-\cref{chap:reproduktion} nähert sich dem aktuellen Forschungsstand mittels der Reproduktion von drei Forschungsergebnissen.
+\cref{chap:reproduktion} nähert sich dem aktuellen Forschungsstand mittels der Reproduktion von zwei Forschungsergebnissen.
 
 \cref{chap:selfsupervised} erläuter die Methode des selbstüberwachten Lernen. Die Methode wird auf die reproduzierten Forschungen angewendet.
 
 %-------------------------------------------------------------------------------
-\chapter{Digtalisierten Dokumente}
+\chapter{Digitalisierte Dokumente}
 \label{chap:documents}
 % Warum scannt man Dokumente
 
@@ -19,7 +21,7 @@ Bereich der Dokumenten-Digitaliserung.
 Schon in den 50er Jahren begann die Forschung im Bereich der Optischen Zeichenerkennung 
 (engl. OCR)\autocite{doermann_evolution_2014}. OCR fand zuerst Anwendung in genau 
 spezifizierten Problembereichen zum Beispiel die Erkennung von Druckbuchstaben einer Schreibmaschine. 
-Je mehr Dokumente digitalisiert wurden, desto klare wurde es das Dokumente mehr als 
+Je mehr Dokumente digitalisiert wurden, desto klarer wurde es das Dokumente mehr als 
 eine Kette von Zeichen sind. 
 
 
@@ -27,7 +29,8 @@ Information wird in Dokumenten auch über die Position der Zeichen und Skalierun
 
 Zum anderen bestehen Dokumente auch aus Inhalten die semantische Bedeutung haben, aber nicht als
 Zeichenkette codiert werden können. 
-Zum Beispiel Textboxen.
+Eine Randnotiz\marginnote{Der Bezug dieses Satzes zum Text wird durch die Position verdeutlicht} setzt sich durch Formatierung und Position vom restlichen Text ab. 
+
 
 \section{Schritte in der Verarbeitung von Dokumentenbildern}
 Die Dokumentensegmetierung ist ein Vorverarbeitungsschritt für weitere Schritte der Dokumentenverarbeitung.
@@ -47,35 +50,59 @@ Ground Trouth Annotation
 Speicherformat
 Struktur und Organisation
 
-\section{Bildverarbeitung mittels Neuronaler Netzwerke}
+\section{DIVA-HisDB}
+Der Datensatz DIVA-HisDB ist eine Sammlung von 150 Dokumentenseiten aus 3 mittelalterlichen Manuskripten \autocite{simistira_icdar2017_2017}.
+\begin{itemize}
+    \item CB55: \citefield{alighieri_cologny_1300}{title}
+    \item CSG18: \citefield{ambrosius_st._985}{title}
+    \item CSG863: \citefield{lucanus_st._1025}{title}
+\end{itemize}
+Die Manuskripte haben ein komplexes Layout und enthalten neben dem Haupttext auch Kommentare und Text-Dekorationen.
+Die Manuskripte wurden mit einer Auflösung von 600 dpi gescannt und sind im  JPEG-Format gespeichert. 
+Der Datensatz wurde manuell auf Pixelebene mit 4 Klassen annotiert (Hintergrund, Haupttext, Kommentar, Dekoration). Diese Ground-Truth-Annotationen sind im PAGE-XML-Format und als ``pixel-label'' PNG-Bilder gespeichert.
 
-\section{CNN}
+
+\begin{table*}
+    \caption{Aufteilung der Seiten des DIVA-HisDB-Datenssets}
+
+    \begin{tabular}{lccccc}
+        {\bfseries Name} & {\bfseries Auflösung} & {\bfseries Training} & {\bfseries Validierung} & {\bfseries Test} & {\bfseries Test (ICDAR 2017)}\\
+        \csvreader[head to column names]{tables/diva_hisdb_specs.csv}{}%
+        {\name&	\width \(\times\)\height & \train	&\validate	&\test	&\comp\\}
+    \end{tabular}
+\end{table*}
+
+
 
 %-------------------------------------------------------------------------------
 \chapter{Reproduktion bisheriger Ergebnisse}
 \label{chap:reproduktion}
 
+\epigraph{What I cannot create, I do not understand}{--- Richarch Feyman}
 
-Differenzierung
+\section{\textcite{chen_convolutional_2017}}
+Superpixel segmentierung
+Klassifizierung auf Superpixel statt Pixelebene.
 
-\section{PyTorch}
+\section{Bildverarbeitung mittels Neuronaler Netzwerke}
+\section{CNN}
+\section{SLIC Superpixel}
+\cite{achanta_slic_2010}
+
+
+\subsection{PyTorch}
 % Genauer klären
 PyTorch ist ein Framework zur automatischen Differenzierung von skaler Funktion \autocite{paszke_automatic_2017}.
 
 \section{Dokumentensegmetierung mittels CNN}
 
 
-\section{\textcite{chen_page_2016}}
-Superpixel segmentierung
-Klassifizierung auf Superpixel statt Pixelebene.
 
-\section{\textcite{wick_fully_2017}}
+\section{\textcite{xu_page_2017}}
+\section{VGG}
+\section{Deconvolution}
 
-\section{\textcite{alberti_historical_2017}}
-
-\section{SLIC Superpixel}
-\cite{achanta_slic_2010}
-
+% \section{\textcite{wick_fully_2017}}
 %-------------------------------------------------------------------------------
 \chapter{Selbstüberwachtes Lernen}
 \label{chap:selfsupervised}
@@ -104,11 +131,12 @@ Sei \(n_{ij}\) die Anzahl der Pixel der Klasse \(i\) die der Klasse \(j\) zugeor
     \hline
         \csvreader[head to column names, filter equal={\dataset}{#2}]{#1}{}%
         {#3}
-        \\\hline
         \end{tabular}
 }
-
-\resulttable{results/document_image_segmentation_results.csv}{CB55}{\\ \name & \pixelacc & \FgPA & \meanacc & \meanIU & \fwIU}
-\resulttable{results/document_image_segmentation_results.csv}{CSG18}{\\  \pixelacc & \FgPA & \meanacc & \meanIU & \fwIU}
-\resulttable{results/document_image_segmentation_results.csv}{CSG863}{\\  \pixelacc & \FgPA & \meanacc & \meanIU & \fwIU}
+\begin{table*}
+    \resulttable{results/document_image_segmentation_results.csv}{CB55}{ \name & \pixelacc & \FgPA & \meanacc & \meanIU & \fwIU\\}
+    \resulttable{results/document_image_segmentation_results.csv}{CSG18}{  \pixelacc & \FgPA & \meanacc & \meanIU & \fwIU\\}
+    \resulttable{results/document_image_segmentation_results.csv}{CSG863}{  \pixelacc & \FgPA & \meanacc & \meanIU & \fwIU\\}
+        
+\end{table*}
 
