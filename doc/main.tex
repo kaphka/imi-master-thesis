@@ -52,11 +52,25 @@ Struktur und Organisation
 
 \section{DIVA-HisDB}
 Der Datensatz DIVA-HisDB ist eine Sammlung von 150 Dokumentenseiten aus 3 mittelalterlichen Manuskripten \autocite{SimistiraICDAR2017CompetitionLayout2017}.
-\begin{itemize}
-    \item CB55: \citefield{AlighieriColognyFondationMartin1300}{title}
-    \item CSG18: \citefield{AmbrosiusStGallenStiftsbibliothek985}{title}
-    \item CSG863: \citefield{LucanusStGallenStiftsbibliothek1025}{title}
-\end{itemize}
+\begin{table*}
+    \begin{tabular}{llp{4cm}}
+        \vspace{0.2cm}
+        {\bfseries Seite} & {\bfseries Detailauschnitt} & {\bfseries Quelle } \\\vspace{0.5cm}
+        
+        \raisebox{-.5\height}{\includegraphics[height=4cm]{figures/datasets/HisDBSample0.jpeg}}
+    &\raisebox{-.5\height}{\includegraphics[height=4cm]{figures/datasets/HisDBSampleBox0.jpeg}}
+     & \citefield{AlighieriColognyFondationMartin1300}{title}\\\vspace{0.5cm}  
+     \raisebox{-.5\height}{\includegraphics[height=4cm]{figures/datasets/HisDBSample1.jpeg}}
+    &
+    \raisebox{-.5\height}{\includegraphics[height=4cm]{figures/datasets/HisDBSampleBox1.jpeg}}
+     & \citefield{LucanusStGallenStiftsbibliothek1025}{title}\\\vspace{0.5cm} 
+     \raisebox{-.5\height}{\includegraphics[height=4cm]{figures/datasets/HisDBSample2.jpeg}}
+    &
+    \raisebox{-.5\height}{\includegraphics[height=4cm]{figures/datasets/HisDBSampleBox2.jpeg}}
+     & \citefield{AmbrosiusStGallenStiftsbibliothek985}{title}\\\vspace{0.5cm}
+    \end{tabular}
+    \caption{HisDB Beipsiele mit Detailauschnitt}
+\end{table*}
 Die Manuskripte haben ein komplexes Layout und enthalten neben dem Haupttext auch Kommentare und Text-Dekorationen.
 Die Manuskripte wurden mit einer Auflösung von 600 dpi gescannt und sind im  JPEG-Format gespeichert. 
 Der Datensatz wurde manuell auf Pixelebene mit 4 Klassen annotiert (Hintergrund, Haupttext, Kommentar, Dekoration). Diese Ground-Truth-Annotationen sind im PAGE-XML-Format und als ``pixel-label'' PNG-Bilder gespeichert.
