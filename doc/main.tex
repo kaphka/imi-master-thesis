@@ -19,7 +19,7 @@ Bereich der Dokumenten-Digitaliserung.
 
 % 
 Schon in den 50er Jahren begann die Forschung im Bereich der Optischen Zeichenerkennung 
-(engl. OCR)\autocite{doermann_evolution_2014}. OCR fand zuerst Anwendung in genau 
+(engl. OCR)\autocite{DoermannHandbookdocumentimage2014}. OCR fand zuerst Anwendung in genau 
 spezifizierten Problembereichen zum Beispiel die Erkennung von Druckbuchstaben einer Schreibmaschine. 
 Je mehr Dokumente digitalisiert wurden, desto klarer wurde es das Dokumente mehr als 
 eine Kette von Zeichen sind. 
@@ -38,11 +38,11 @@ Eine typische Aufgabe ist die Erkennung des Leseflüsses.
 
 Im Bereich der Bibliotheswissenschaften besteht ein großes Interesse an Klassifizierung von
 Buchseiten zur besseren Erschließung.
-\cite{mcconnaughey_labeled_2017} klassifizieren Buchseiten anhand von textbasierten Features in 4 Kategorien. 
+\cite{McConnaugheyLabeledSegmentationPrinted2017} klassifizieren Buchseiten anhand von textbasierten Features in 4 Kategorien. 
 Flow
 
 \section{Auswahl und Beschreibung der Datensätze}
-\textcite[985\psqq]{doermann_datasets_2014} listen 5 Aspekte die bei der Erstellung von Datensätzen zu beachten sind:
+\textcite[985\psqq]{DoermannHandbookdocumentimage2014} listen 5 Aspekte die bei der Erstellung von Datensätzen zu beachten sind:
 Auswahl der Daten
 Datenbeschaffung
 Ground Truth Definition
@@ -51,11 +51,11 @@ Speicherformat
 Struktur und Organisation
 
 \section{DIVA-HisDB}
-Der Datensatz DIVA-HisDB ist eine Sammlung von 150 Dokumentenseiten aus 3 mittelalterlichen Manuskripten \autocite{simistira_icdar2017_2017}.
+Der Datensatz DIVA-HisDB ist eine Sammlung von 150 Dokumentenseiten aus 3 mittelalterlichen Manuskripten \autocite{SimistiraICDAR2017CompetitionLayout2017}.
 \begin{itemize}
-    \item CB55: \citefield{alighieri_cologny_1300}{title}
-    \item CSG18: \citefield{ambrosius_st._985}{title}
-    \item CSG863: \citefield{lucanus_st._1025}{title}
+    \item CB55: \citefield{AlighieriColognyFondationMartin1300}{title}
+    \item CSG18: \citefield{AmbrosiusStGallenStiftsbibliothek985}{title}
+    \item CSG863: \citefield{LucanusStGallenStiftsbibliothek1025}{title}
 \end{itemize}
 Die Manuskripte haben ein komplexes Layout und enthalten neben dem Haupttext auch Kommentare und Text-Dekorationen.
 Die Manuskripte wurden mit einer Auflösung von 600 dpi gescannt und sind im  JPEG-Format gespeichert. 
@@ -80,35 +80,35 @@ Der Datensatz wurde manuell auf Pixelebene mit 4 Klassen annotiert (Hintergrund,
 
 \epigraph{What I cannot create, I do not understand}{--- Richarch Feyman}
 
-\section{\textcite{chen_convolutional_2017}}
+\section{\textcite{ChenConvolutionalNeuralNetworks2017}}
 Superpixel segmentierung
 Klassifizierung auf Superpixel statt Pixelebene.
 
 \section{Bildverarbeitung mittels Neuronaler Netzwerke}
 \section{CNN}
 \section{SLIC Superpixel}
-\cite{achanta_slic_2010}
+\cite{AchantaSLICSuperpixels2010}
 
 
 \subsection{PyTorch}
 % Genauer klären
-PyTorch ist ein Framework zur automatischen Differenzierung von skaler Funktion \autocite{paszke_automatic_2017}.
+PyTorch ist ein Framework zur automatischen Differenzierung von skaler Funktion \autocite{PaszkeAutomaticdifferentiationPyTorch2017}.
 
 \section{Dokumentensegmetierung mittels CNN}
 
 
 
-\section{\textcite{xu_page_2017}}
+\section{\textcite{XuPageSegmentationHistorical2017}}
 \section{VGG}
 \section{Deconvolution}
+\section{Ergebnisse}
 
-% \section{\textcite{wick_fully_2017}}
 %-------------------------------------------------------------------------------
 \chapter{Selbstüberwachtes Lernen}
 \label{chap:selfsupervised}
 
 Jigsaw
-\cite{noroozi_unsupervised_2016}
+\cite{NorooziUnsupervisedLearningVisual2016}
 % \begin{figure}
 %     \includegraphics[]{figures/graphs/exp.pdf} 
 %     \caption{Image}
@@ -122,7 +122,7 @@ Jigsaw
 
 \subsection{Metriken}
 Die Evaluierung der Ergebnisse der Segmentierung erfolgt auf Pixelebene.
-\cite{long_fully_2015} berechnet 4 Metriken.
+\cite{LongFullyconvolutionalnetworks2015} berechnet 4 Metriken.
 Sei \(n_{ij}\) die Anzahl der Pixel der Klasse \(i\) die der Klasse \(j\) zugeordnet wurden.
 
 
