@@ -1,0 +1,1 @@
+from skimage.segmentation import slic
