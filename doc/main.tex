@@ -91,12 +91,23 @@ Der Datensatz wurde manuell auf Pixelebene mit 4 Klassen annotiert (Hintergrund,
 %-------------------------------------------------------------------------------
 \chapter{Reproduktion bisheriger Ergebnisse}
 \label{chap:reproduktion}
-
 \epigraph{What I cannot create, I do not understand}{--- Richarch Feyman}
 
+Das erste Experiment basiert auf dem neusten Paper von \citeauthor{ChenConvolutionalNeuralNetworks2017}. 
+
 \section{\textcite{ChenConvolutionalNeuralNetworks2017}}
-Superpixel segmentierung
-Klassifizierung auf Superpixel statt Pixelebene.
+\citeauthor{ChenConvolutionalNeuralNetworks2017} nutzen den Superpixelalgorithmus SlIC 
+\cite{AchantaSLICSuperpixels2010} um die Dokumentenseiten in Superpixel einzuteilen.
+Ein CNN klassifiziert dann Superpixel statt jeden Pixel einzeln.
+Während des Trainings wird das Ground-truth Label des Zentrumpixels als Label für den Superpixel verwendet.
+
+\citeauthor{ChenConvolutionalNeuralNetworks2017} verweisen für die Details zur Vorverarbeitung 
+auf ihr Paper \cite{ChenPageSegmentationHistorical2016}. 
+In diesem Paper werden die Bilder vor Anwendung des SLIC-Algorithmus skaliert.
+Dabei werden zwei Skalierungsfaktoren verwendent (\(2^{-2}\text{ und } 2^{-3}\)).
+ 
+Jedoch wird nicht weiter spezifizert.
+
 
 \section{Bildverarbeitung mittels Neuronaler Netzwerke}
 \section{CNN}
