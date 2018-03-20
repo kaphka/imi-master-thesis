@@ -296,3 +296,5 @@ doc/latex.out/
 # pdf
 doc/thesis.pdf
 
+#pycharm
+.idea
