@@ -33,20 +33,23 @@ class Annotations(IntFlag):
 BOUNDARY = 0x800000
 
 def to_class_vector(flag, all=True):
-    mask = 0xFFFFF
-    return np.array(list(format(flag & mask, '04b')), dtype=np.ubyte)
+    masked = 0xFFFFF & flag
+    # np.array(list(format(flag & mask, '04b')), dtype=np.ubyte)
+    vec = [bool(0x000008 & masked),
+           bool(0x000004 & masked),
+           bool(0x000002 & masked),
+           bool(0x000001 & masked)]
+    return np.array(vec, dtype=np.ubyte)
 
 def to_encoding(array, one_hot=False):
     encoding = np.zeros((array.shape[0], array.shape[1], len(Annotations)),dtype=np.ubyte)
-    classes = list(Annotations)
-    it = np.nditer(array, flags=['multi_index'])
+    shape = encoding.shape
+    encoding = encoding.reshape((-1, 4))
+    it = np.nditer(array.flat, flags=['f_index'])
     while not it.finished:
-        annotation = Annotations(int(it.value))
-        for c in classes:
-            if bool(c & annotation):
-                # print(c,annotation,bool(c & annotation),classes.index(c))
-                encoding[it.multi_index[0],it.multi_index[1],int(classes.index(c))] = 1
+        encoding[it.index, :] = to_class_vector(it.value)
         it.iternext()
+    encoding = encoding.reshape(shape)
     return encoding
 
 
