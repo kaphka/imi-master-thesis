@@ -66,11 +66,12 @@ def gtpath(p):
 
 def color_gt(gt):
     render = np.ones((gt.shape[0], gt.shape[1], 3), dtype=np.ubyte) * 255
-    render[(gt & BOUNDARY).astype(bool)] = [100, 100, 100]
+    # render[(gt & BOUNDARY).astype(bool)]
     render[gt == Annotations.BACKGROUND] = [255, 255, 255]
-    render[gt == Annotations.BODY_TEXT] = [0, 0, 255]
-    render[gt == Annotations.COMMENT] = [0, 255, 0]
-    render[gt == Annotations.DECORATION] = [255, 0, 0]
+    render[(gt & Annotations.BODY_TEXT).astype(bool)] = [0, 0, 255]
+    render[(gt & Annotations.COMMENT).astype(bool)] = [0, 255, 0]
+    render[(gt & Annotations.DECORATION).astype(bool)] = [255, 0, 0]
+    render[(gt & BOUNDARY).astype(bool)] = [100, 100, 100]
     return render
 
 class HisDBDataset(torch.utils.data.Dataset):
@@ -122,6 +123,6 @@ class HisDBDataset(torch.utils.data.Dataset):
         else: 
             gt_arr = None
 
-        return arr, gt_arr
+        return img, gt_arr
 
 

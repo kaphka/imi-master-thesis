@@ -53,7 +53,31 @@ Speicherformat
 Struktur und Organisation
 
 \section{DIVA-HisDB}
+Die DIVA \marginnote{\url{http://diuf.unifr.ch/main/diva/}}(Document, Image and Voice Analysis) Gruppe der Universität Fribourg hat im Kontext der Forschungsprojekte HisDoc und HisDoc 2.0 
+das Datenset DIVA-HisDB. erstellt.
+Die HisDoc-Projekte beschäftigen der automatischen Analyse von historischen Dokumenten und
+wie man diese für historiker Nutzbar machen kann.
+
+Die Manuskripte haben ein komplexes Layout und enthalten neben dem Haupttext auch Kommentare und Text-Dekorationen.
+Die Manuskripte wurden mit einer Auflösung von 600 dpi gescannt und sind im  JPEG-Format gespeichert. 
 Der Datensatz DIVA-HisDB ist eine Sammlung von 150 Dokumentenseiten aus 3 mittelalterlichen Manuskripten \autocite{SimistiraICDAR2017CompetitionLayout2017}.
+Der Datensatz wurde semi-automatisch mit 3 Annotation (Haupttext, Kommentare, Dekorationen) versehen.
+Diese Ground-Truth-Annotationen sind im PAGE-XML-Format und als ``pixel-label'' PNG-Bilder gespeichert.
+
+Die Menge an Pixeln pro Klasse ist sehr unterschiedlich.
+Die \cref{class_distribution} zeigt das in jedem Dokumentenset der Hintergrund deutlich überwiegt.
+
+\begin{table}
+    \caption{Verteilung der Klassen in Prozent\autocite[1362]{SimistiraICDAR2017CompetitionLayout2017}}
+    \label{class_distribution}
+    \begin{tabular}{lrrrr}
+        {\bfseries Set} & {\bfseries Hintergrund} & {\bfseries Kommentar} & {\bfseries Dekoration} & {\bfseries Text}\\
+        \csvreader[head to column names]{tables/diva_hisdb_class_distribution.csv}{}%
+        {\set&	\background & \comments & \decoration & \text \\}
+    \end{tabular}
+\end{table}
+
+
 \begin{table*}
     \begin{tabular}{llp{4cm}}
         \vspace{0.2cm}
@@ -73,9 +97,7 @@ Der Datensatz DIVA-HisDB ist eine Sammlung von 150 Dokumentenseiten aus 3 mittel
     \end{tabular}
     \caption{HisDB Beipsiele mit Detailauschnitt}
 \end{table*}
-Die Manuskripte haben ein komplexes Layout und enthalten neben dem Haupttext auch Kommentare und Text-Dekorationen.
-Die Manuskripte wurden mit einer Auflösung von 600 dpi gescannt und sind im  JPEG-Format gespeichert. 
-Der Datensatz wurde manuell auf Pixelebene mit 4 Klassen annotiert (Hintergrund, Haupttext, Kommentar, Dekoration). Diese Ground-Truth-Annotationen sind im PAGE-XML-Format und als ``pixel-label'' PNG-Bilder gespeichert.
+
 
 
 \begin{table*}
