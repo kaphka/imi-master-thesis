@@ -32,24 +32,19 @@ class Annotations(IntFlag):
 #     }
 BOUNDARY = 0x800000
 
-def to_class_vector(flag, all=True):
-    masked = 0xFFFFF & flag
-    # np.array(list(format(flag & mask, '04b')), dtype=np.ubyte)
-    vec = [bool(0x000008 & masked),
-           bool(0x000004 & masked),
-           bool(0x000002 & masked),
-           bool(0x000001 & masked)]
-    return np.array(vec, dtype=np.ubyte)
+def to_class_vector(flags, all=True):
+    masked = flags & 0xFFFFF
+    encoding = np.zeros((len(masked), len(Annotations)), dtype=np.ubyte)
+    for idx, anno in enumerate(Annotations):
+        encoding[..., idx] = (anno & masked).astype(bool).astype(np.ubyte)
+    return encoding
 
 def to_encoding(array, one_hot=False):
-    encoding = np.zeros((array.shape[0], array.shape[1], len(Annotations)),dtype=np.ubyte)
-    shape = encoding.shape
-    encoding = encoding.reshape((-1, 4))
-    it = np.nditer(array.flat, flags=['f_index'])
-    while not it.finished:
-        encoding[it.index, :] = to_class_vector(it.value)
-        it.iternext()
-    encoding = encoding.reshape(shape)
+    # encoding = np.zeros((array.shape[0], array.shape[1], len(Annotations)),dtype=np.ubyte)
+    shape = array.shape
+    encoding = array.reshape((-1, 1))[:,0]
+    encoding = to_class_vector(encoding)
+    encoding = encoding.reshape((shape[0], shape[1], -1))
     return encoding
 
 
@@ -69,6 +64,14 @@ def gtpath(p):
         p = Path(p)
     return p.parents[2] / 'pixel-level-gt' / 'training' / (p.stem + '.png')
 
+def color_gt(gt):
+    render = np.ones((gt.shape[0], gt.shape[1], 3), dtype=np.ubyte) * 255
+    render[(gt & BOUNDARY).astype(bool)] = [100, 100, 100]
+    render[gt == Annotations.BACKGROUND] = [255, 255, 255]
+    render[gt == Annotations.BODY_TEXT] = [0, 0, 255]
+    render[gt == Annotations.COMMENT] = [0, 255, 0]
+    render[gt == Annotations.DECORATION] = [255, 0, 0]
+    return render
 
 class HisDBDataset(torch.utils.data.Dataset):
 
@@ -100,7 +103,7 @@ class HisDBDataset(torch.utils.data.Dataset):
         else: 
             split = 'validation'
             
-        self.paths = glob(str(path / '*' / 'img' / split / '*.jpg'))
+        self.paths = sorted(glob(str(path / '*' / 'img' / split / '*.jpg')))
 
     def __len__(self):
         return len(self.paths)
@@ -120,3 +123,5 @@ class HisDBDataset(torch.utils.data.Dataset):
             gt_arr = None
 
         return arr, gt_arr
+
+
