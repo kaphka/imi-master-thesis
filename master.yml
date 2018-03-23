@@ -16,6 +16,8 @@ dependencies:
 - scipy
 - nomkl
 - pytest
+- graphviz
+- python-graphviz
 - pip:
   - internetarchive
   - pillow-simd
