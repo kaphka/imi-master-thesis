@@ -1,24 +1,29 @@
 \chapter{Reproduktion bisheriger Ergebnisse}
 \label{chap:reproduktion}
 \epigraph{What I cannot create, I do not understand}{--- Richarch Feyman}
-\qq{Warum NN?}
+
 Künstliche Neuronale Netzwerke (kurz NN) dominieren den Forschungsbereich der 
-Bilderkennung dank vieler Erfolge. 
+Bilderkennung dank vieler Erfolge. \qq{Warum NN?}
 Die Wissenschaft der NN ist ein Feld, dass durch die aktuelle Praxis mehr als durch Theorie geprägt ist. 
 
 Die Reproduktion ist ein wichtiger Bestandteil in jedem Forschungsgebiet. 
 
 
-Das erste Experiment basiert auf dem neusten Paper von Mitgliedern der DIVA-Gruppe \citeauthor*{ChenConvolutionalNeuralNetworks2017}. 
-
-Das zweite Experiment basiert auf der Forschung der Gewinner \citeauthor*{XuPageSegmentationHistorical2017} 
+Das erste Experiment basiert auf dem neusten Paper von Mitgliedern der DIVA-Gruppe: \citeauthor*{ChenConvolutionalNeuralNetworks2017}. 
+\qq{welche Experimente?}
+Das zweite Experiment basiert auf der Forschung des Gewinners des IDCAR2017-Wettbewerbs: \citeauthor*{XuPageSegmentationHistorical2017} 
 
 \section{\cite{ChenConvolutionalNeuralNetworks2017}}
 
 \subsection{Vorverarbeitung}
-\citeauthor{ChenConvolutionalNeuralNetworks2017} nutzen den Superpixelalgorithmus SLIC (simple linerar iterative clustering)
+Eine der ersten Probleme bei der Verarbeitung von Dokumentenseiten ist ihre Größe.
+Die Bilder im HisDB-Datenset sind mit einer Auflösung von \(4872 \times 6496\) wesentlich größer als andere Datensets.\qq{Welche?}
+
+\citeauthor{ChenConvolutionalNeuralNetworks2017} skalieren deshalb alle Bilder mit einem Faktor von  \(2^{-3}\) und wenden dann den Superpixelalgorithmus SLIC (simple linerar iterative clustering) an
 \cite{AchantaSLICSuperpixels2010} um die Dokumentenseiten in Superpixel einzuteilen.
-Ein CNN klassifiziert dann Superpixel statt jeden Pixel einzeln.
+Ein \(28 \times 28\)-Bereich um das Zentrum des Superpixel wird dann mithilfe eines faltenden Neuronalen Netzwerks (engl Convolutional Neural Netzwerke, kurz CNN)
+klassifiziert. Diese Klassifizierung wird dann allen Pixel innerhalb des Superpixels zugewiesen.
+
 Während des Trainings wird das Ground-truth Label des Zentrumpixels als Label für den Superpixel verwendet.
 
 \citeauthor{ChenConvolutionalNeuralNetworks2017} verweisen für die Details zur Vorverarbeitung 
@@ -26,11 +31,19 @@ auf ihr Paper \cite{ChenPageSegmentationHistorical2016}.
 In diesem Paper werden die Bilder vor Anwendung des SLIC-Algorithmus mit einem Faktor von \(2^{-3}\)) skaliert.
 
 
+\section{SLIC Superpixel}
+Der SLIC-Algorithmus basiert auf dem k-Means-Algorithmus und teilt Pixel inhalb eines 5D-Raums in Cluster ein \autocite{AchantaSLICSuperpixels2010}. 
+In jedem Arbeitsschritt werden Pixel dem Clusterzentrum mit der geringsten Distanz zugeordnet und danach werden die Clusterzentren neu berechnet.
+Das Distanzmaß \(D_s\) zu den Clusterzentren \(k=[1,K]\) basiert auf den Farbabstand im Lab-Farbraum \(d_{lab}\) und den räumlichen Abstand \(d_{xy}\):
+
+\begin{align}
+    d_{lab} &= \sqrt{ \left( l_k - l_i \right)^2 + \left( a_k - a_i \right)^2 + \left( b_k - b_i \right)^2 }\\
+    d_{xy}  &= \sqrt{ \left( x_k - x_i \right)^2 + \left(y_k - y_i \right)^2 }\\
+    D_{s}   &= d_{lab} + \frac{m}{S} d_{xy}
+\end{align}
 
 \section{Bildverarbeitung mittels Neuronaler Netzwerke}
 \section{CNN}
-\section{SLIC Superpixel}
-\cite{AchantaSLICSuperpixels2010}
 
 
 \subsection{PyTorch}
