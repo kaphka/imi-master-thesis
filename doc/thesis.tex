@@ -16,8 +16,9 @@
 \usepackage{svg}
 \usepackage{amsmath}
 \usepackage{xcolor,listings}
-\include{include/listings}
-\include{include/tuftefix}
+\input{include/listings}
+\input{include/tuftefix}
+\usepackage[export]{adjustbox}
 \usepackage[caption=false]{subfig}
 
 \usepackage{blindtext}
@@ -72,23 +73,31 @@
 \setlength\epigraphrule{0pt}
 
 \author{Jakob Schmolling}
+
+% style settings
+
 % numberings
 \setcounter{secnumdepth}{1}
 \setcounter{tocdepth}{1}
 
+\input{style/colors.tex}
 % Macros
 \newcommand{\sfigure}[2]{
     \begin{figure}
-    \includegraphics[]{#2} 
+    \includegraphics[width=\textwidth]{#2} 
     \caption{#1}
     \end{figure}
+}
+\newcommand{\qq}[1]{
+    \marginnote{{\color{signal}#1}}
 }
 
 \begin{document}
 % \maketitle
 \include{titlepage}
 \tableofcontents
-\include{main}
+\pagebreak
+\input{main}
 
 
 \printbibliography[heading=bibintoc, title={Literaturverzeichnis}]\clearpage

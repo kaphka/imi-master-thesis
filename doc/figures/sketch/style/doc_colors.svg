@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="50px" height="300px" viewBox="0 0 50 300" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: (null) (null) ((null)) - http://www.bohemiancoding.com/sketch -->
+    <title>style/doc_colors</title>
+    <desc>Created with (null).</desc>
+    <defs></defs>
+    <g id="style" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="style/doc_colors" fill-rule="nonzero">
+            <g id="Doc-Colors-[0v-l]">
+                <g id="color_background" transform="translate(0.000000, 50.000000)" fill="#D2D3D3">
+                    <rect id="color_5" x="0" y="0" width="50" height="50"></rect>
+                </g>
+                <g id="color_emph" transform="translate(0.000000, 250.000000)" fill="#5D5E5E">
+                    <rect x="0" y="0" width="50" height="50"></rect>
+                </g>
+                <g id="color_alternative" transform="translate(0.000000, 200.000000)" fill="#083D77">
+                    <polygon points="0 0 50 0 50 50 0 50"></polygon>
+                </g>
+                <g id="color_light" transform="translate(0.000000, 150.000000)" fill="#D0E1D4">
+                    <rect x="0" y="0" width="50" height="50"></rect>
+                </g>
+                <g id="color_signal" transform="translate(0.000000, 100.000000)" fill="#F74511">
+                    <rect x="0" y="0" width="50" height="50"></rect>
+                </g>
+                <g id="color_edge" fill="#0C120C">
+                    <rect x="0" y="0" width="50" height="50"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
