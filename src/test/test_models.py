@@ -1,4 +1,5 @@
-from models.simplecnn import SimpleCNN
+from models.chennet import ChenNet
 
-def test_simplecnn():
-    net = SimpleCNN()
+def test_ChenNet():
+    net = ChenNet()
+    assert net.log_name is not None

@@ -19,6 +19,7 @@ def getdatasetpath(name):
 
 def test_diva():
     path = getdatasetpath('DIVA-HisDB')
+    print(Path(os.curdir).absolute())
     dataset = HisDBDataset(path,)
     run_dataset_test(dataset)
 
