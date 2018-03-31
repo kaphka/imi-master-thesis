@@ -50,5 +50,15 @@ class ChenNet(nn.Module):
 
     @property
     def log_name(self):
-        return self._log_name + 'convlayers_{}'.format(self.n_conv_layers)
-#
+        return self._log_name + self.conf_str
+
+    @property
+    def name(self):
+        return self._log_name
+
+    @property
+    def conf_str(self):
+        return '{}_{}_{}'.format(
+            self.n_conv_layers,
+            self.n_kernels,
+            self.max_pool_size)

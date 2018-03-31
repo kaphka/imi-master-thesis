@@ -1,4 +1,4 @@
-from models.chennet import ChenNet
+from models.chen2017.chennet import ChenNet
 
 def test_ChenNet():
     net = ChenNet()
