@@ -1,7 +1,9 @@
 %!TEX program = xelatex
 \documentclass[nobib, nohyper, a4paper, notoc, sfsidenotes,  twoside]{tufte-book}
 % \XeTeXinputnormalization=1
-% \usepackage[babel,german=quotes]{csquotes}
+\usepackage[ngerman]{babel}
+\usepackage{fontspec}
+\usepackage[babel,german=quotes]{csquotes}
 \usepackage{polyglossia}
 \usepackage[xetex,
             bookmarks=true,
@@ -31,11 +33,10 @@
 
 
 
-\usepackage{fontspec}
 \usepackage[parfill]{parskip}
 
-\setromanfont[Mapping=tex-text]{Linux Biolinum}
-\setsansfont[Mapping=tex-text]{Gill Sans}
+% \setromanfont[Mapping=tex-text]{Linux Biolinum}
+% \setsansfont[Mapping=tex-text]{Gill Sans}
 \setmonofont[Mapping=tex-text,Scale=0.8]{Droid Sans Mono}
 % \newfontfamily{\sym}{Font Awesome 5 Pro Regular}
 % \newfontfamily{\sym}{Linux Biolinum}

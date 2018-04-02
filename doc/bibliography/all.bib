@@ -301,7 +301,7 @@
   abstract = {In this work we investigate the effect of the convolutional network depth on its accuracy in the large-scale image recognition setting. Our main contribution is a thorough evaluation of networks of increasing depth using an architecture with very small (3x3) convolution filters, which shows that a significant improvement on the prior-art configurations can be achieved by pushing the depth to 16-19 weight layers. These findings were the basis of our ImageNet Challenge 2014 submission, where our team secured the first and the second places in the localisation and classification tracks respectively. We also show that our representations generalise well to other datasets, where they achieve state-of-the-art results. We have made our two best-performing ConvNet models publicly available to facilitate further research on the use of deep visual representations in computer vision.},
   urldate = {2017-05-22},
   date = {2014-09-04},
-  keywords = {Computer Science - Computer Vision and Pattern Recognition},
+  keywords = {Computer Science - Computer Vision and Pattern Recognition,vgg},
   author = {Simonyan, Karen and Zisserman, Andrew}
 }
 
@@ -420,7 +420,7 @@ Sovetskoe Photo magazine
   url = {http://arxiv.org/abs/1707.02968},
   abstract = {The success of deep learning in vision can be attributed to: (a) models with high capacity; (b) increased computational power; and (c) availability of large-scale labeled data. Since 2012, there have been significant advances in representation capabilities of the models and computational capabilities of GPUs. But the size of the biggest dataset has surprisingly remained constant. What will happen if we increase the dataset size by 10x or 100x? This paper takes a step towards clearing the clouds of mystery surrounding the relationship between `enormous data' and visual deep learning. By exploiting the JFT-300M dataset which has more than 375M noisy labels for 300M images, we investigate how the performance of current vision tasks would change if this data was used for representation learning. Our paper delivers some surprising (and some expected) findings. First, we find that the performance on vision tasks increases logarithmically based on volume of training data size. Second, we show that representation learning (or pre-training) still holds a lot of promise. One can improve performance on many vision tasks by just training a better base model. Finally, as expected, we present new state-of-the-art results for different vision tasks including image classification, object detection, semantic segmentation and human pose estimation. Our sincere hope is that this inspires vision community to not undervalue the data and develop collective efforts in building larger datasets.},
   date = {2017-07-10},
-  keywords = {Computer Science - Computer Vision and Pattern Recognition,Computer Science - Artificial Intelligence},
+  keywords = {Computer Science - Artificial Intelligence,Computer Science - Computer Vision and Pattern Recognition},
   author = {Sun, Chen and Shrivastava, Abhinav and Singh, Saurabh and Gupta, Abhinav},
   annotation = {Comment: ICCV 2017 camera ready}
 }
@@ -956,17 +956,21 @@ Alle Bildpatches werden in relation zueinander gesehen.}
   date = {2017-09},
   pages = {2352--2449},
   author = {Rawat, Waseem and Wang, Zenghui},
-  annotation = {1. Einführung:
+  annotation = {\section{CNN}
+
+1. Einführung:
 
 Klassifikation war zwei Stufenproblem
 
 1. Feature Design, dann Klassifizierer
 
-2. Große Erfolge für CNNs: LeCun1998, Krizhevsky et al. (2012)
+2. Große Erfolge für CNNs: LeCun1998 (LeNet-5),
+
+Krizhevsky et al. (2012): ILSCRC 2012 Challenge
 
 2353: CNN ist die führende Netzwerkarchitektur für Musteranalyse und Klassifizierung
 
-Inspiriert vom visuellen Kortex, Neuronen die auf speziell Orientierte Muster reagieren 
+Inspiriert vom visuellen Kortex, Neuronen die auf speziell Orientierte Muster reagieren
 
 Feed forward Netzwerke
 
@@ -996,11 +1000,29 @@ Overfitting ist häufiges Problem
 
 \subsection{Backpropagation}
 
-~
+S.E.Dreyfus (1962)
+
+\subsection{CNN und Unsupervised Training}
+
+2006-2010: unsupervised training (e.g. Autoencoder) + fine tuning
+
+Xu, Gong, and Xing (2008) first performed a set of pseudo-tasks on data in an unsupervised fashion
 
 ~
 
-~}
+Biologically plausible
+
+labeld Data $<<$ unlabeld Data
+
+~
+
+\subsection{ReLU, Dropout, Regularization}
+
+Nair \& Hinton, 2010
+
+Hinton et al., 2012
+
+Dropout: veringert coodepence von Neuronen. Beim Training sind nur p\% aktiv}
 }
 
 @article{WickFullyConvolutionalNeural2017,
@@ -1044,10 +1066,11 @@ Overfitting ist häufiges Problem
   urldate = {2018-02-15}
 }
 
-@online{HarryRansomCenter,
+@online{HarryRansomCenter2018,
   title = {Harry {{Ransom Center Digital Collections}} - {{Harry Ransom Center Digital Collections}}},
   url = {https://hrc.contentdm.oclc.org/digital/},
-  urldate = {2018-02-19}
+  urldate = {2018-02-19},
+  date = {2018}
 }
 
 @article{RonnebergerUNetConvolutionalNetworks2015,
@@ -1177,7 +1200,7 @@ Overfitting ist häufiges Problem
   booktitle = {2017 14th {{IAPR International Conference}} on {{Document Analysis}} and {{Recognition}} ({{ICDAR}})},
   date = {2017-11},
   pages = {541--546},
-  keywords = {Testing,document image processing,handwritten character recognition,image classification,learning (artificial intelligence),text detection,image recognition,Training,document image analysis,Feature extraction,image segmentation,layout analysis,page segmentation,Image color analysis,Layout,convolution,image denoising,neural nets,DIVA-HisDB public dataset,FCN,fully convolutional network,historical handwritten documents,medieval manuscripts,pixel-level accuracy,pixel-wise classification,pixel-wise labels,pixel-wise segmentation method,supervised learning,Image edge detection},
+  keywords = {convolution,DIVA-HisDB public dataset,document image analysis,document image processing,FCN,Feature extraction,fully convolutional network,handwritten character recognition,historical handwritten documents,image classification,Image color analysis,image denoising,Image edge detection,image recognition,image segmentation,Layout,layout analysis,learning (artificial intelligence),medieval manuscripts,neural nets,page segmentation,pixel-level accuracy,pixel-wise classification,pixel-wise labels,pixel-wise segmentation method,supervised learning,Testing,text detection,Training},
   author = {Xu, Y. and He, W. and Yin, F. and Liu, C. L.}
 }
 
@@ -1212,7 +1235,6 @@ Overfitting ist häufiges Problem
   institution = {{e-codices - Virtual Manuscript Library of Switzerland}},
   urldate = {2018-03-13},
   date = {0985},
-  pages = {--},
   author = {Ambrosius, Mediolanensis and Theodulfus, Aurelianensis and Elpis, Sicula and Prudentius Clemens, Aurelius and Venantius, Fortunatus},
   doi = {10.5076/e-codices-csg-0018}
 }
@@ -1225,7 +1247,6 @@ Overfitting ist häufiges Problem
   institution = {{e-codices - Virtual Manuscript Library of Switzerland}},
   urldate = {2018-03-13},
   date = {1025},
-  pages = {--},
   author = {Lucanus, Marcus Annaeus},
   doi = {10.5076/e-codices-csg-0863}
 }
@@ -1259,6 +1280,26 @@ Overfitting ist häufiges Problem
   date = {1989},
   pages = {541--551},
   author = {LeCun, Yann and Boser, Bernhard and Denker, John S. and Henderson, Donnie and Howard, Richard E. and Hubbard, Wayne and Jackel, Lawrence D.}
+}
+
+@article{SchmidhuberDeeplearningneural2015,
+  langid = {english},
+  title = {Deep Learning in Neural Networks: {{An}} Overview},
+  volume = {61},
+  issn = {08936080},
+  doi = {10.1016/j.neunet.2014.09.003},
+  shorttitle = {Deep Learning in Neural Networks},
+  journaltitle = {Neural Networks},
+  date = {2015-01},
+  pages = {85--117},
+  author = {Schmidhuber, Jürgen}
+}
+
+@online{IIIFInternationalImage2018,
+  title = {{{IIIF}} | {{International Image Interoperability Framework}}},
+  url = {http://iiif.io/},
+  urldate = {2018-03-29},
+  date = {2018}
 }
 
 

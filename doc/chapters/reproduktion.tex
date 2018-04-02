@@ -34,16 +34,11 @@ Eine der ersten Probleme bei der Verarbeitung von Dokumentenseiten ist ihre Grö
 Die Bilder im HisDB-Datenset sind mit einer Auflösung von \(4872 \times 6496\) wesentlich größer als andere Datensets.\qq{Welche?}
 
 \citeauthor{ChenConvolutionalNeuralNetworks2017} skalieren deshalb alle Bilder mit einem Faktor von  \(2^{-3}\) und wenden dann den Superpixelalgorithmus SLIC (simple linerar iterative clustering) an
-\cite{AchantaSLICSuperpixels2010} um die Dokumentenseiten in Superpixel einzuteilen.
+\autocite{AchantaSLICSuperpixels2010} um die Dokumentenseiten in Superpixel einzuteilen.
 Ein \(28 \times 28\)-Bereich um das Zentrum des Superpixel wird dann mithilfe eines faltenden Neuronalen Netzwerks (engl Convolutional Neural Netzwerke, kurz CNN)
 klassifiziert. Diese Klassifizierung wird dann allen Pixel innerhalb des Superpixels zugewiesen.
 
 Während des Trainings wird das Ground-truth Label des Zentrumpixels als Label für den Superpixel verwendet.
-
-\citeauthor{ChenConvolutionalNeuralNetworks2017} verweisen für die Details zur Vorverarbeitung 
-auf ihr Paper \cite{ChenPageSegmentationHistorical2016}. 
-In diesem Paper werden die Bilder vor Anwendung des SLIC-Algorithmus mit einem Faktor von \(2^{-3}\)) skaliert.
-
 
 \section{SLIC Superpixel}
 Der SLIC-Algorithmus basiert auf dem k-Means-Algorithmus und teilt Pixel inhalb eines 5D-Raums in Cluster ein \autocite{AchantaSLICSuperpixels2010}. 
