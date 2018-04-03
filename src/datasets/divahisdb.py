@@ -9,14 +9,16 @@ import random
 from PIL import Image
 from zipfile import ZipFile
 import torchvision.transforms as transforms
-from enum import IntFlag
+from enum import IntFlag, IntEnum
+import logging
 
 import numpy as np
 
 SET_NAMES = ['CB55', 'CSG18', 'CSG863']
-SPLITS = ['public-test', 'training', 'validation']
-NAME = 'DIVA-HisDB'
 DATA_NAMES = ['img', 'PAGE-gt', 'pixel-level-gt']
+SPLITS = ['training', 'validation', 'public-test']
+NAME = 'DIVA-HisDB'
+
 
 class Annotations(IntFlag):
     BODY_TEXT = 0x000008
@@ -24,13 +26,33 @@ class Annotations(IntFlag):
     COMMENT = 0x000002
     BACKGROUND = 0x000001
 
-# ANNOTATIONS = {
-#         0x000008: 'main text body',
-#         0x000004: 'decoration',
-#         0x000002: 'comment',
-#         0x000001: 'background',
-#     }
+# class Labels(Annotations):
+#     BODY_DECORATION = Annotations.BODY_TEXT|Annotations.DECORATION
+#     COMMENT_DECORATION = Annotations.COMMENT|Annotations.DECORATION
+
 BOUNDARY = 0x800000
+
+def numeric_gt(gt, label_boundary=False):
+    gt_labels = np.zeros((gt.shape[0], gt.shape[1]), dtype=np.ubyte)
+    gt_labels[gt == (Annotations.BACKGROUND)] = 0
+    gt_labels[gt == (Annotations.DECORATION)] = 1
+    gt_labels[gt == (Annotations.COMMENT)] = 2
+    gt_labels[gt == (Annotations.BODY_TEXT)] = 3
+    if label_boundary:
+        gt_labels[gt == (Annotations.DECORATION | BOUNDARY)] = 1
+        gt_labels[gt == (Annotations.COMMENT | BOUNDARY)] = 2
+        gt_labels[gt == (Annotations.BODY_TEXT | BOUNDARY)] = 3
+    return  gt_labels
+
+
+def binary_gt(gt):
+    gt_bin_labels = np.zeros(gt.shape + (4,), dtype=np.float)
+    gt_bin_labels[gt == (Annotations.BACKGROUND)] += [1, 0, 0, 0]
+    gt_bin_labels[gt == (Annotations.DECORATION)] += [0, 1, 0, 0]
+    gt_bin_labels[gt == (Annotations.COMMENT)]    += [0, 0, 1, 0]
+    gt_bin_labels[gt == (Annotations.BODY_TEXT) ] += [0, 0, 0, 1]
+    return  gt_bin_labels
+
 
 def to_class_vector(flags, all=True):
     masked = flags & 0xFFFFF
@@ -58,21 +80,51 @@ def to_hex(array):
     array = np.asarray(array, dtype='uint32')
     return ((array[:, :, 0] << 16) + (array[:, :, 1] << 8) + array[:, :, 2])
 
+class DIVAPath(IntEnum):
+    split = 0
+    data_format = 1
+    set = 2
 
-def gtpath(p):
+def change_diva_path(p, set=None, split=None, ext=None, data_format=None):
+    """
+    Change diva path parameters:
+        path/Set/
+    :param p:
+    :param set:
+    :param split:
+    :param ext:
+    :return:
+    """
     if isinstance(p, str):
         p = Path(p)
-    return p.parents[2] / 'pixel-level-gt' / 'training' / (p.stem + '.png')
+    if not split:
+        split = p.parents[DIVAPath.split].name
+    if not data_format:
+        data_format = p.parents[DIVAPath.data_format].name
+    if not set:
+        set = p.parents[DIVAPath.set].name
+    if ext is not None:
+        name = p.stem + ext
+    else:
+        name = p.name
+    return p.parents[3] / set / data_format/ split / name
 
-def color_gt(gt):
+
+def color_gt(gt, show_boundary=False):
     render = np.ones((gt.shape[0], gt.shape[1], 3), dtype=np.ubyte) * 255
     # render[(gt & BOUNDARY).astype(bool)]
     render[gt == Annotations.BACKGROUND] = [255, 255, 255]
-    render[(gt & Annotations.BODY_TEXT).astype(bool)] = [0, 0, 255]
-    render[(gt & Annotations.COMMENT).astype(bool)] = [0, 255, 0]
-    render[(gt & Annotations.DECORATION).astype(bool)] = [255, 0, 0]
-    render[(gt & BOUNDARY).astype(bool)] = [100, 100, 100]
+    render[(gt == Annotations.BODY_TEXT).astype(bool)] = [0, 0, 255]
+    render[(gt == Annotations.COMMENT).astype(bool)] = [0, 255, 0]
+    render[(gt == Annotations.DECORATION).astype(bool)] = [255, 0, 0]
+    if show_boundary:
+        render[(gt & BOUNDARY).astype(bool)] = [100, 100, 100]
     return render
+
+def load_pixel_label(path):
+    gt = Image.open(str(path))
+    gt_arr = to_hex(np.array(gt))
+    return gt_arr
 
 class HisDBDataset(torch.utils.data.Dataset):
 
@@ -82,7 +134,6 @@ class HisDBDataset(torch.utils.data.Dataset):
         # assert outpath.exists()
         # zipfile = ZipFile(str(zippath))
         pass
-
 
     def __init__(self, path, transform=None, download=True, train=True, gt=False):
         self.gt = gt
@@ -112,17 +163,44 @@ class HisDBDataset(torch.utils.data.Dataset):
     def __getitem__(self, index):
         assert index < len(self)
         imgpath = self.paths[index]
-        gt_file = str(gtpath(self.paths[index]))
-        img =  Image.open(imgpath)
-        arr = np.array(img)
+        gt_file = change_diva_path(self.paths[index], data_format= 'pixel-level-gt', ext='.png')
+        img = Image.open(imgpath)
+        # arr = np.array(img)
 
         if self.gt:
             # only load one channel
-            gt = Image.open(gt_file)
-            gt_arr = to_hex(np.array(gt))
+            gt_arr = load_pixel_label(gt_file)
         else: 
             gt_arr = None
 
         return img, gt_arr
 
+
+class Processed(torch.utils.data.Dataset):
+    def __init__(self, path, transform=None, set='*', split=None, data=None, gt=False):
+        self.set = set
+        self.path = path
+        self.data = data
+        self.split = split
+        self.ext = '.jpg'
+
+        if not self.split:
+            self.split = SPLITS[0]
+        if not data:
+            self.data = DATA_NAMES[0]
+        glob_str = str(path / self.set / self.data / self.split / ('*' + self.ext))
+        self.paths = sorted(glob(glob_str))
+        logging.debug(glob_str)
+
+    def __len__(self):
+        return len(self.paths)
+
+    def __getitem__(self, index):
+        img = Path(self.paths[index])
+        p = change_diva_path(img,ext='')
+        seg_file = change_diva_path(p, ext='.slic.npy')
+        tiles_file = change_diva_path(p, ext='.tiles.npy')
+        meta_file = change_diva_path(p, ext='.meta.npy')
+        patchgt_file = change_diva_path(p, ext='.patchgt.npy')
+        return img, seg_file, tiles_file, meta_file, patchgt_file
 

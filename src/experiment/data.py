@@ -1,6 +1,6 @@
 from pathlib import Path
 import json
-from collections import namedtuple
+import time
 
 
 class Environment(object):
@@ -37,7 +37,7 @@ class TrainLog(object):
     Save events in
     models/model_name/dataset_name/log/log_name
     """
-    def __init__(self, env=None, dataset_name='data', model=None):
+    def __init__(self, env=None, dataset_name='data', model=None, log_time=False):
         if env is None:
             env = Environment()
         if model is not None:
@@ -48,6 +48,8 @@ class TrainLog(object):
             self.log_name = 'conf'
 
         self.dataset_name = dataset_name
+        if log_time:
+            self.log_name += str(int(time.time()))
 
         base = env.models_folder / self.model_name / self.dataset_name
         self.save_directory = base / self.log_name

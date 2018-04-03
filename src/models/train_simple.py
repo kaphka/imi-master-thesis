@@ -33,9 +33,12 @@ transform = transforms.Compose(
 mnist_set = torchvision.datasets.MNIST(str(env.dataset(dataset_name)), train=True, download=True, transform=transform)
 train_loader = torch.utils.data.DataLoader(mnist_set, batch_size=64,
                                            shuffle=True, num_workers=2)
+mnist_test_set = torchvision.datasets.MNIST(str(env.dataset(dataset_name)), train=False, download=True, transform=transform)
+test_loader = torch.utils.data.DataLoader(mnist_test_set, batch_size=64,
+                                           shuffle=True, num_workers=2)
 
 model = Model(n_classes=10, in_channels=1, layers=4)
-exp = TrainLog(env, dataset_name,model)
+exp = TrainLog(env, dataset_name,model,log_time=True)
 
 # Load loaders
 # train_loader, validate_loader = get_cifar10_loaders(DATASET_DIRECTORY,
@@ -49,12 +52,14 @@ trainer = Trainer(model) \
     .save_to_directory(str(exp.save_directory)) \
     .set_log_directory(str(exp.save_directory)) \
     .save_every((2, 'epochs')) \
-    .set_max_num_epochs(4) \
+    .validate_every((2, 'epochs'))\
+    .set_max_num_epochs(10) \
     .build_logger(TensorboardLogger(log_scalars_every=(1, 'iteration'),
                                     log_images_every='never'),
                   log_directory=str(exp.log_directory))
 # Bind loaders
 trainer.bind_loader('train', train_loader)
+trainer.bind_loader('validate', test_loader)
 trainer.cuda()
 
 # Go!
