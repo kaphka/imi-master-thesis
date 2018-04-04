@@ -49,13 +49,14 @@ class SegmentTiling(object):
         Point = namedtuple('Point', ['x', 'y'])
 
         nsegments = int(np.max(segments)) + 1
-        print(nsegments)
+        # print(nsegments)
         if max_patches > 0:
             nsegments = max_patches
         if len(image.shape) > 2:
             patch_shape = (nsegments, self.patch_width, self.patch_width, 3)
         else:
             patch_shape = (nsegments, self.patch_width, self.patch_width)
+
         patches = np.zeros(patch_shape, dtype=image.dtype)
         patch_meta = np.zeros((nsegments, 3), dtype=np.int32)
         patch_count = 0
@@ -66,21 +67,19 @@ class SegmentTiling(object):
             mmax, nmax = list(map(max, spixel))
 
             spixel = SLICPixel(mmin, nmin, mmax - mmin, nmax - nmin)
-            center = Point(int(spixel.x + (spixel.width) / 2) + 0.5,
-                           int(spixel.y + (spixel.height) / 2 + 0.5))
+            center = Point(spixel.x + spixel.width / 2 + 0.5,
+                           spixel.y + spixel.height / 2 + 0.5)
             patch = SLICPixel(center.x - self.patch_width / 2,
                               center.y - self.patch_width / 2,
                               self.patch_width, self.patch_width)
-            print(patch)
-            dimension = mmax - mmin, nmax - nmin
             p = self.centered_patch(patch.x, patch.y, patch.width)
             img_patch = image[p]
 
             if img_patch.shape[0] == self.patch_width and img_patch.shape[1] == self.patch_width:
-                #         print(patch)
                 patches[patch_count, :, :] = img_patch
                 patch_meta[patch_count, :] = [center.x, center.y, snum]
                 patch_count += 1
+
         # prune
         patches = patches[:patch_count]
         patch_meta = patch_meta[:patch_count]

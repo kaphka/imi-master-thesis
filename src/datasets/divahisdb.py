@@ -177,12 +177,13 @@ class HisDBDataset(torch.utils.data.Dataset):
 
 
 class Processed(torch.utils.data.Dataset):
-    def __init__(self, path, transform=None, set='*', split=None, data=None, gt=False):
+    def __init__(self, path, transform=None, set='*', split=None, data=None, gt=False, load=['img']):
         self.set = set
         self.path = path
         self.data = data
         self.split = split
         self.ext = '.jpg'
+        self.load = load
 
         if not self.split:
             self.split = SPLITS[0]
@@ -198,9 +199,18 @@ class Processed(torch.utils.data.Dataset):
     def __getitem__(self, index):
         img = Path(self.paths[index])
         p = change_diva_path(img,ext='')
-        seg_file = change_diva_path(p, ext='.slic.npy')
-        tiles_file = change_diva_path(p, ext='.tiles.npy')
-        meta_file = change_diva_path(p, ext='.meta.npy')
-        patchgt_file = change_diva_path(p, ext='.patchgt.npy')
-        return img, seg_file, tiles_file, meta_file, patchgt_file
+        paths = {
+        'slic': change_diva_path(p, ext='.slic.npy'),
+        'tiles': change_diva_path(p, ext='.tiles.npy'),
+        'meta': change_diva_path(p, ext='.meta.npy'),
+        'y': change_diva_path(p, ext='.patchgt.npy')
+        }
+        items = []
+        for l in self.load:
+            if l == 'img':
+                items.append(Image.open(str(img)))
+            else:
+                items.append(np.load(paths[l]))
+
+        return items
 

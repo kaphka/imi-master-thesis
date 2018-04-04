@@ -11,7 +11,7 @@ import logging
 env = exd.Environment()
 processed_path = env.dataset('DIVA_Chen2017_processed')
 hisdb_path = env.dataset('DIVA-HisDB')
-dataset = diva.HisDBDataset(hisdb_path)
+dataset = diva.HisDBDataset(hisdb_path, train=False)
 
 import skimage.io
 import skimage.segmentation as seg
@@ -28,7 +28,7 @@ get_gt = TileGroundTruth()
 def change_ext(name, ext):
     return splitext(name)[0] + '.' + ext
 
-for p in tqdm(dataset.paths[:2]):
+for p in tqdm(dataset.paths):
     path = Path(p)
     gt_file = diva.change_diva_path(path, data_format='pixel-level-gt', ext='.png')
     print(gt_file)
@@ -44,13 +44,15 @@ for p in tqdm(dataset.paths[:2]):
     # scale
     logging.debug('scaled %s', processed_file)
     scaled = scaler(img)
+    del img
 
     # segment
     spixel = slic(scaled)
     logging.debug('slic  %s', seg_file)
 
     # patches
-    tiles, tile_specs = get_tiles(img_as_ubyte(scaled), spixel, max_patches=n_patches)
+    bw = scaled.convert('L')
+    tiles, tile_specs = get_tiles(img_as_ubyte(bw), spixel, max_patches=n_patches)
     logging.debug('tiles %s', tiles_file)
     logging.debug('meta  %s', meta_file)
 
