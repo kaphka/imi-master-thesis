@@ -1,6 +1,13 @@
 from pathlib import Path
 import json
 import time
+import enum
+
+
+class Datasets(enum.Enum):
+    diva = 'DIVA-HisDB'
+    processd = 'DIVA_Chen2017_processed'
+    balanced = 'Chen2017_np_tiles_balanced'
 
 
 class Environment(object):
@@ -8,6 +15,7 @@ class Environment(object):
     def __init__(self, conf="~/.thesis.conf"):
         conv_path = Path("~/.thesis.conf").expanduser()
         self.config = json.load(conv_path.open())
+
 
     @property
     def models_folder(self):
@@ -52,6 +60,6 @@ class TrainLog(object):
             self.log_name += str(int(time.time()))
 
         base = env.models_folder / self.model_name / self.dataset_name
-        self.save_directory = base / self.log_name
+        self.save_directory = base / 'trained' /  self.log_name
         self.log_directory  = base / 'log' / self.log_name
 

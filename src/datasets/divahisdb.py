@@ -9,7 +9,7 @@ import random
 from PIL import Image
 from zipfile import ZipFile
 import torchvision.transforms as transforms
-from enum import IntFlag, IntEnum
+from enum import IntFlag, IntEnum, Enum
 import logging
 
 import numpy as np
@@ -20,17 +20,33 @@ SPLITS = ['training', 'validation', 'public-test']
 NAME = 'DIVA-HisDB'
 
 
+class Splits(Enum):
+    training = 'training'
+    validation = 'validation'
+    test = 'public-test'
+
 class Annotations(IntFlag):
     BODY_TEXT = 0x000008
     DECORATION = 0x000004
     COMMENT = 0x000002
     BACKGROUND = 0x000001
 
+
+
 # class Labels(Annotations):
 #     BODY_DECORATION = Annotations.BODY_TEXT|Annotations.DECORATION
 #     COMMENT_DECORATION = Annotations.COMMENT|Annotations.DECORATION
 
 BOUNDARY = 0x800000
+
+LABEL_DICT = {
+    0: Annotations.BACKGROUND,
+    1: Annotations.DECORATION,
+    2: Annotations.COMMENT,
+    3: Annotations.BODY_TEXT
+}
+def label_to_code(label):
+    return LABEL_DICT[label]
 
 def numeric_gt(gt, label_boundary=False):
     gt_labels = np.zeros((gt.shape[0], gt.shape[1]), dtype=np.ubyte)
@@ -88,7 +104,7 @@ class DIVAPath(IntEnum):
 def change_diva_path(p, set=None, split=None, ext=None, data_format=None):
     """
     Change diva path parameters:
-        path/Set/
+        path/Set/data_format/split
     :param p:
     :param set:
     :param split:
@@ -135,7 +151,7 @@ class HisDBDataset(torch.utils.data.Dataset):
         # zipfile = ZipFile(str(zippath))
         pass
 
-    def __init__(self, path, transform=None, download=True, train=True, gt=False):
+    def __init__(self, path, transform=None, download=True, split=None, gt=False):
         self.gt = gt
         for set_name in SET_NAMES:
             folder = path / set_name
@@ -150,11 +166,11 @@ class HisDBDataset(torch.utils.data.Dataset):
             imagesgt = path / 'pixel-level-gt-{}.zip'.format(set_name)
             self.unzip(images, folder)
             self.unzip(imagesgt, folder)
-        if train:
-            split = 'training'
-        else: 
-            split = 'validation'
-            
+
+        self.split = split
+        if split is None:
+            self.split = Splits.training.name
+
         self.paths = sorted(glob(str(path / '*' / 'img' / split / '*.jpg')))
 
     def __len__(self):

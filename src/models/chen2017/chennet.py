@@ -15,37 +15,59 @@ import torchvision.transforms as transforms
 
 
 class ChenNet(nn.Module):
+    def init_weights(self,m):
+        if type(m) == nn.Linear:
+            torch.nn.init.xavier_uniform(m.weight)
+            m.bias.data.fill_(0.01)
+
+    def block(self):
+        return nn.Sequential(
+            nn.Conv2d(),
+            nn.ReLU(inplace=True)
+        )
 
     def __init__(self, n_classes=2, kernels=4, layers=1, max_pool_size=0, in_channels=1, tensor_width=28):
+        super(ChenNet, self).__init__()
         self._log_name = 'ChenNet'
         self.n_conv_layers = layers
         self.n_kernels = kernels
         self.max_pool_size = max_pool_size
-        super(ChenNet, self).__init__()
         self.conv = nn.Sequential()
         out_channels = kernels
+
+        self.dropout = nn.Dropout()
         for n in range(layers):
+            # self.conv.add_module('dropout', self.dropout)
             self.conv.add_module('conv' + str(n), nn.Conv2d(in_channels, out_channels, 3))
+            self.conv.add_module('ReLU', nn.ReLU(inplace=True))
             in_channels = out_channels
             out_channels += 2
-        self.maxpool = nn.MaxPool2d(max_pool_size)
-        self.dropout = nn.Dropout()
-        self.out_dim = list(self.conv.children())[-1].out_channels * ((tensor_width - len(list(self.conv.children())) * 2) ** 2)
 
-        self.fc1 = nn.Linear(self.out_dim, 100)
-        self.fc2 = nn.Linear(100, n_classes)
+        # self.maxpool = nn.MaxPool2d(max_pool_size)
+        self.out_dim = list(self.conv.children())[-1].out_channels * ((tensor_width - layers * 2) ** 2)
+
+        self.classifier = nn.Sequential(
+            self.dropout,
+            nn.Linear(self.out_dim, 100),
+            self.dropout,
+            nn.Linear(100, n_classes),
+            nn.Softmax(dim=1))
+
+        self.conv.apply(self.init_weights)
+        self.classifier.apply(self.init_weights)
 
     def forward(self, x):
+        # print(x.size(), self.out_dim)
         x = self.conv(x)
-        x = F.relu(x)
-        x = self.dropout(x)
-        # print(x.size())
         x = x.view(x.size()[0], -1)
+        x = self.classifier(x)
         # print(x.size(), self.fc1.in_features)
-        x = self.fc1(x)
-        x = F.relu(x)
-        x = self.fc2(x)
-        x = F.softmax(x, dim=1)
+        # x = self.dropout(x)
+        # x = self.fc1(x)
+        # x = F.relu(x)
+        # x = self.dropout(x)
+        # x = self.fc2(x)
+        # x = F.softmax(x, dim=1)
         return x
 
     @property
