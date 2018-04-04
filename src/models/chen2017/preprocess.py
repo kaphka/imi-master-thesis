@@ -11,7 +11,9 @@ import logging
 env = exd.Environment()
 processed_path = env.dataset('DIVA_Chen2017_processed')
 hisdb_path = env.dataset('DIVA-HisDB')
-dataset = diva.HisDBDataset(hisdb_path, train=False)
+datasets = [diva.HisDBDataset(hisdb_path, split=diva.Splits.training.name),
+    diva.HisDBDataset(hisdb_path, split=diva.Splits.validation.name),
+    diva.HisDBDataset(hisdb_path, split=diva.Splits.test.name)]
 
 import skimage.io
 import skimage.segmentation as seg
@@ -21,52 +23,52 @@ from skimage.transform import resize, rotate
 # logging.basicConfig(level=logging.DEBUG)
 n_patches = 0
 scaler = Scale()
-slic = SLIC()
+slic = SLIC(n_segments=3000, compactness=50)
 get_tiles = SegmentTiling()
 get_gt = TileGroundTruth()
 
 def change_ext(name, ext):
     return splitext(name)[0] + '.' + ext
+for dataset in tqdm(datasets):
+    for p in tqdm(dataset.paths):
+        path = Path(p)
+        gt_file = diva.change_diva_path(path, data_format='pixel-level-gt', ext='.png')
+        print(gt_file)
+        processed_file = processed_path / path.relative_to(hisdb_path)
+        processed_file.parent.mkdir(exist_ok=True, parents=True)
 
-for p in tqdm(dataset.paths):
-    path = Path(p)
-    gt_file = diva.change_diva_path(path, data_format='pixel-level-gt', ext='.png')
-    print(gt_file)
-    processed_file = processed_path / path.relative_to(hisdb_path)
-    processed_file.parent.mkdir(exist_ok=True, parents=True)
+        seg_file   = diva.change_diva_path(processed_file, ext='.slic')
+        tiles_file = diva.change_diva_path(processed_file, ext='.tiles')
+        meta_file  = diva.change_diva_path(processed_file, ext='.meta')
+        patchgt_file =  diva.change_diva_path(processed_file, ext='.patchgt')
 
-    seg_file   = diva.change_diva_path(processed_file, ext='.slic')
-    tiles_file = diva.change_diva_path(processed_file, ext='.tiles')
-    meta_file  = diva.change_diva_path(processed_file, ext='.meta')
-    patchgt_file =  diva.change_diva_path(processed_file, ext='.patchgt')
+        img = Image.open(path)
+        # scale
+        logging.debug('scaled %s', processed_file)
+        scaled = scaler(img)
+        del img
 
-    img = Image.open(path)
-    # scale
-    logging.debug('scaled %s', processed_file)
-    scaled = scaler(img)
-    del img
+        # segment
+        spixel = slic(scaled)
+        logging.debug('slic  %s', seg_file)
 
-    # segment
-    spixel = slic(scaled)
-    logging.debug('slic  %s', seg_file)
-
-    # patches
-    bw = scaled.convert('L')
-    tiles, tile_specs = get_tiles(img_as_ubyte(bw), spixel, max_patches=n_patches)
-    logging.debug('tiles %s', tiles_file)
-    logging.debug('meta  %s', meta_file)
+        # patches
+        bw = scaled.convert('L')
+        tiles, tile_specs = get_tiles(img_as_ubyte(bw), spixel, max_patches=n_patches)
+        logging.debug('tiles %s', tiles_file)
+        logging.debug('meta  %s', meta_file)
 
 
-    # gt
-    gt = diva.load_pixel_label(gt_file)
-    gt_labels = diva.numeric_gt(gt, label_boundary=True)
-    scaled_gt = np.array(Image.fromarray(gt_labels).resize((scaled.width, scaled.height)))
-    # y = gt[np.round(tile_specs[:, 0] / scaler.scale).astype(int), np.round(tile_specs[:, 1] / scaler.scale).astype(int)]
-    y = scaled_gt[tile_specs[:, 0], tile_specs[:, 1]]
+        # gt
+        gt = diva.load_pixel_label(gt_file)
+        gt_labels = diva.numeric_gt(gt, label_boundary=True)
+        scaled_gt = np.array(Image.fromarray(gt_labels).resize((scaled.width, scaled.height)))
+        # y = gt[np.round(tile_specs[:, 0] / scaler.scale).astype(int), np.round(tile_specs[:, 1] / scaler.scale).astype(int)]
+        y = scaled_gt[tile_specs[:, 0], tile_specs[:, 1]]
 
-    scaled.save(processed_file)
-    np.save(str(seg_file), spixel)
-    np.save(str(tiles_file), tiles)
-    np.save(str(meta_file), tile_specs)
-    np.save(str(patchgt_file), y)
+        scaled.save(processed_file)
+        np.save(str(seg_file), spixel)
+        np.save(str(tiles_file), tiles)
+        np.save(str(meta_file), tile_specs)
+        np.save(str(patchgt_file), y)
 

@@ -21,12 +21,12 @@ class Scale(object):
 
 
 class SLIC(object):
-    def __init__(self, k=3000):
-        self.k = k
+    def __init__(self, **kwargs):
+        self.kwargs = kwargs
 
     def __call__(self, image):
         floats = img_as_float(image)
-        segments = seg.slic(floats, n_segments=self.k)
+        segments = seg.slic(floats, **self.kwargs)
         return segments
 
 
