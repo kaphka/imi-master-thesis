@@ -294,7 +294,7 @@ doc/latex.out/
 *.vswp
 
 # pdf
-doc/thesis.pdf
+doc/*.pdf
 
 #pycharm
 .idea

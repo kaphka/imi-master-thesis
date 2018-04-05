@@ -1,0 +1,59 @@
+%!TEX program = xelatex
+\documentclass[nobib, nohyper, a4paper, notoc, sfsidenotes,  twoside]{tufte-book}
+% \XeTeXinputnormalization=1
+\usepackage[ngerman]{babel}
+\usepackage{fontspec}
+\usepackage[babel,german=quotes]{csquotes}
+\usepackage{polyglossia}
+\usepackage[xetex,
+            bookmarks=true,
+            colorlinks=true,
+            linktoc=section,
+            pdfauthor={Your Name},
+            pdftitle={The Title},
+            pdfsubject={The Subject},
+            pdfkeywords={Some Keywords},
+            ]{hyperref}
+\usepackage{booktabs}
+\usepackage{svg}
+\usepackage{amsmath}
+\usepackage{xcolor,listings}
+\input{include/listings}
+\input{include/tuftefix}
+\usepackage[export]{adjustbox}
+\usepackage[caption=false]{subfig}
+
+\usepackage{blindtext}
+
+\usepackage{csvsimple}
+\setdefaultlanguage[spelling=new,babelshorthands=true]{german}
+\setotherlanguage[]{english}
+
+\usepackage[parfill]{parskip}
+\usepackage{graphicx}
+\usepackage[
+    % sorting=nyt,
+    isbn=false,
+    style=authoryear-icomp,
+    % citestyle=authoryear,
+    % bibstyle=authoryear,
+    % % natbib=true,
+    % autocite=footnote,
+    backend=biber,
+    date=short
+    ]{biblatex}
+\addbibresource{bibliography/all.bib}
+\usepackage{cleveref}
+\captionsetup[subfigure]{subrefformat=simple,labelformat=simple}
+\renewcommand\thesubfigure{(\alph{subfigure})}
+
+\usepackage{layouts}
+\usepackage{epigraph}
+
+\input{style/colors.tex}
+
+\begin{document}
+\section{Notes}
+\section{CNN}
+\cite{GoodfellowDeeplearning2016}
+\end{document}

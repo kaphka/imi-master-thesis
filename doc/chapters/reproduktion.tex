@@ -2,9 +2,20 @@
 \label{chap:reproduktion}
 \epigraph{What I cannot create, I do not understand}{--- Richarch Feyman}
 
+\qq{Warum NN?}
 Künstliche Neuronale Netzwerke (kurz NN) dominieren den Forschungsbereich der 
-Bilderkennung dank vieler Erfolge. \qq{Warum NN?}
-Die Wissenschaft der NN ist ein Feld, dass durch die aktuelle Praxis mehr als durch Theorie geprägt ist. 
+Bilderkennung dank vieler Erfolge. 
+Besonders die Klasse der faltenden Neuronalen Netzwerks (engl. Convolutional Neural Network, kurz CNN) konnte viele Erfolge für sich beanspruchen.
+Rekordbrechende Erfolge bei der Klassifiziererung von handgeschriebenen Ziffern \parencite{LeCunBackpropagationappliedhandwritten1989} und des ImageNet-Wettbewerbs \parencite{KrizhevskyImageNetClassificationDeep2012a} motivieren dazu CNN-Methoden auch in anderen
+Bereichen anzuwenden.
+
+Neurale Netzwerke benötigen weniger Entwicklungsaufwand und können zudem einfacher von der 
+von wachsenden Resourzen und Datenmengen gebrauch machen \parencite[436]{LeCunDeeplearning2015}. 
+Aber die Wissenschaft der NN ist ein Feld, dass durch die aktuelle Praxis mehr als durch Theorie geprägt ist. Das beudeuted zum einen das theoretische Grundlagen noch nicht gefestigt sind.
+Zum anderen ist die Theorie nur eine Faktor für den erfolgreichen Einsatz von NNs. 
+
+Je mehr Parameter unklar sind desto schwieriger wird eine Reproduktion.
+Im folgenden werden Paper genauer untersucht, die sich mit dem Problem der Dokumentensegmentierung mit Hilfe von 
 
 Die Reproduktion ist ein wichtiger Bestandteil in jedem Forschungsgebiet. 
 
@@ -15,6 +26,9 @@ Das zweite Experiment basiert auf der Forschung des Gewinners des IDCAR2017-Wett
 
 \section{Bildverarbeitung mittels Neuronaler Netzwerke}
 Einleitung \cite{LeCunDeeplearning2015}
+
+
+\section{SGD}
 \section{Aktivierungsfunktionen}
 \subsection{ReLU}
 \begin{align}
@@ -22,7 +36,7 @@ Einleitung \cite{LeCunDeeplearning2015}
 \end{align}
 \subsection{Softmax}
 
-\section{SGD}
+
 \section{CNN}
 \qq{Filter als vorläufer von CNN}
 CNN kombinieren zwei Konzepte der Bilderverarbeitung: Neuronale Netzwerke und Filter.
@@ -33,7 +47,8 @@ verwendet wurden \autocite[2353]{RawatDeepConvolutionalNeural2017}.
 \qq{Filterbeispiel?}
 \qq{}
 
-\section{\cite{ChenConvolutionalNeuralNetworks2017}}
+\section{\textcite{ChenConvolutionalNeuralNetworks2017}}
+Das Paper ``\citetitle*{ChenConvolutionalNeuralNetworks2017}'' von \citeauthor*{ChenConvolutionalNeuralNetworks2017}.
 
 \subsection{Vorverarbeitung}
 Eine der ersten Probleme bei der Verarbeitung von Dokumentenseiten ist ihre Größe.
@@ -41,13 +56,13 @@ Die Bilder im HisDB-Datenset sind mit einer Auflösung von \(4872 \times 6496\) 
 
 \citeauthor{ChenConvolutionalNeuralNetworks2017} skalieren deshalb alle Bilder mit einem Faktor von  \(2^{-3}\) und wenden dann den Superpixelalgorithmus SLIC (simple linerar iterative clustering) an
 \autocite{AchantaSLICSuperpixels2010} um die Dokumentenseiten in Superpixel einzuteilen.
-Ein \(28 \times 28\)-Bereich um das Zentrum des Superpixel wird dann mithilfe eines faltenden Neuronalen Netzwerks (engl Convolutional Neural Netzwerke, kurz CNN)
+Ein \(28 \times 28\)-Bereich um das Zentrum des Superpixel wird dann mithilfe eines CNN
 klassifiziert. Diese Klassifizierung wird dann allen Pixel innerhalb des Superpixels zugewiesen.
 
 Während des Trainings wird das Ground-truth Label des Zentrumpixels als Label für den Superpixel verwendet.
 
 \section{SLIC Superpixel}
-Der SLIC-Algorithmus basiert auf dem k-Means-Algorithmus und teilt Pixel inhalb eines 5D-Raums in Cluster ein \autocite{AchantaSLICSuperpixels2010}. 
+Der SLIC-Algorithmus basiert auf dem k-Means-Algorithmus und teilt Pixel inhalb eines 5D-Raums in Cluster ein. 
 In jedem Arbeitsschritt werden Pixel dem Clusterzentrum mit der geringsten Distanz zugeordnet und danach werden die Clusterzentren neu berechnet.
 Das Distanzmaß \(D_s\) zu den Clusterzentren \(k=[1,K]\) basiert auf den Farbabstand im Lab-Farbraum \(d_{lab}\) und den räumlichen Abstand \(d_{xy}\):
 
@@ -99,6 +114,8 @@ PyTorch ist ein Framework zur automatischen Differenzierung von skaler Funktion 
 
 
 \section{\textcite{XuPageSegmentationHistorical2017}}
+Das Paper ``\citetitle*{XuPageSegmentationHistorical2017}'' von \citeauthor*{XuPageSegmentationHistorical2017}.
+
 \section{VGG}
 \section{Deconvolution}
 \section{Ergebnisse}
