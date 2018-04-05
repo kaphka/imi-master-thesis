@@ -6,9 +6,12 @@ Diese Arbeit beschäftigt sich mit der Layout-Segmentierung von Digtalisierten D
 \cref{chap:documents} beschreibt die Motivation für die Dokumentensegmetierung und aktuelle Entwicklungen im
 Bereich der Dokumenten-Digitalisierung.
 
-\cref{chap:reproduktion} nähert sich dem aktuellen Forschungsstand mittels der Reproduktion von zwei Forschungsergebnissen.
+\cref{chap:reproduktion} beschreibt die Theorie des aktuellen Forschungsstand und stellt damit die Grundlage für die Reproduktion von zwei Forschungsergebnissen.
 
 \cref{chap:selfsupervised} erläuter die Methode des selbstüberwachten Lernen. Die Methode wird auf die reproduzierten Forschungen angewendet.
+
+\cref{chap:umsetzung} erläutert Details, Probleme und Ergebnisse der umgesetzten
+Reproduktionen und dem Einsatz von selbstüberwachten Lernen.
 
 %-------------------------------------------------------------------------------
 \include{chapters/dokumente}
@@ -17,29 +20,8 @@ Bereich der Dokumenten-Digitalisierung.
 %-------------------------------------------------------------------------------
 \include{chapters/selfsupervised}
 %-------------------------------------------------------------------------------
-\chapter{Umsetzung}
+\include{chapters/umsetzung}
 
-\section{Evaluierung}
+\section{Fazit}
 
-\sfigure{Beispiel aus dem DIBCO2013-Dateset}{figures/tasks/DIBCO2013-dataset.pdf}
-
-\subsection{Metriken}
-Die Evaluierung der Ergebnisse der Segmentierung erfolgt auf Pixelebene.
-\cite{LongFullyconvolutionalnetworks2015} berechnet 4 Metriken.
-Sei \(n_{ij}\) die Anzahl der Pixel der Klasse \(i\) die der Klasse \(j\) zugeordnet wurden.
-
-
-\newcommand{\resulttable}[3]{
-    \begin{tabular}{l|r|r|r|r|r}%
-    \hline
-        \csvreader[head to column names, filter equal={\dataset}{#2}]{#1}{}%
-        {#3}
-        \end{tabular}
-}
-\begin{table*}
-    \resulttable{results/document_image_segmentation_results.csv}{CB55}{ \name & \pixelacc & \FgPA & \meanacc & \meanIU & \fwIU\\}
-    \resulttable{results/document_image_segmentation_results.csv}{CSG18}{  \pixelacc & \FgPA & \meanacc & \meanIU & \fwIU\\}
-    \resulttable{results/document_image_segmentation_results.csv}{CSG863}{  \pixelacc & \FgPA & \meanacc & \meanIU & \fwIU\\}
-        
-\end{table*}
 

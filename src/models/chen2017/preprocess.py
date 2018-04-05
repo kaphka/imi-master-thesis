@@ -23,7 +23,7 @@ from skimage.transform import resize, rotate
 # logging.basicConfig(level=logging.DEBUG)
 n_patches = 0
 scaler = Scale()
-slic = SLIC(n_segments=3000, compactness=50)
+slic = SLIC(n_segments=3000, slic_zero=True)
 get_tiles = SegmentTiling()
 get_gt = TileGroundTruth()
 

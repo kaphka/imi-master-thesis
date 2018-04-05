@@ -25,7 +25,7 @@ std =56.83193208713197
 transform = transforms.Compose(
     [
         transforms.ToTensor(),
-        transforms.Normalize((mean, mean, mean), (std,std,std))
+        transforms.Normalize((mean,), (std,))
     ])
 
 train_set = array.Tiles(dataset_path, transforms=transform)
@@ -43,15 +43,17 @@ logging.info(' logging to %s', exp.log_directory)
 # Build trainer
 max_num_iterations = 5000
 trainer = Trainer(model) \
-    .build_criterion('CrossEntropyLoss') \
+    .build_criterion('NLLLoss') \
     .build_metric('CategoricalError') \
     .build_optimizer('Adam') \
-    .save_every((2000, 'iterations'), to_directory=str(exp.save_directory), checkpoint_filename='latest', best_checkpoint_filename='best') \
+    .save_every((1, 'epochs')) \
+    .save_to_directory(str(exp.save_directory))\
     .validate_every((2, 'epochs'))\
-    .set_max_num_iterations(max_num_iterations) \
+    .set_max_num_epochs(10) \
     .build_logger(TensorboardLogger(log_scalars_every=(1, 'iterations'),
                                     log_images_every='never'),
                   log_directory=str(exp.log_directory))
+    # .save_every((2000, 'iterations'), to_directory=str(exp.save_directory), checkpoint_filename='latest') \
 
 # Bind loaders
 trainer.bind_loader('train', train_loader)

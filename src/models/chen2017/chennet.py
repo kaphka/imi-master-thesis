@@ -51,23 +51,17 @@ class ChenNet(nn.Module):
             nn.Linear(self.out_dim, 100),
             self.dropout,
             nn.Linear(100, n_classes),
-            nn.Softmax(dim=1))
+            nn.LogSoftmax(dim=1)
+            )
 
         self.conv.apply(self.init_weights)
         self.classifier.apply(self.init_weights)
 
     def forward(self, x):
-        # print(x.size(), self.out_dim)
         x = self.conv(x)
         x = x.view(x.size()[0], -1)
         x = self.classifier(x)
-        # print(x.size(), self.fc1.in_features)
-        # x = self.dropout(x)
-        # x = self.fc1(x)
-        # x = F.relu(x)
-        # x = self.dropout(x)
-        # x = self.fc2(x)
-        # x = F.softmax(x, dim=1)
+
         return x
 
     @property

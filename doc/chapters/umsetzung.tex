@@ -1,0 +1,40 @@
+\chapter{Umsetzung}
+\label{chap:umsetzung}
+\section{Chen}
+SLIC Paramter nicht spezifiziert 
+aslic?
+Netz Lernt, aber nur MNIST
+\sfigure{Fehlerrate CheNet(4,4,0) während der Trainingsiterationen}{figures/plot/run_ChenNet_MNIST_log_ChenNet4_4_01522892733-tag-training_error.pdf}
+Boundary pixel werden als GT label verwendet
+
+\section{Xu}
+multilabel vorhersage?
+
+\section{Discrimitve}
+
+\section{Evaluierung}
+\label{chap:eval}
+
+
+\sfigure{Beispiel aus dem DIBCO2013-Dateset}{figures/tasks/DIBCO2013-dataset.pdf}
+
+
+\subsection{Metriken}
+Die Evaluierung der Ergebnisse der Segmentierung erfolgt auf Pixelebene.
+\cite{LongFullyconvolutionalnetworks2015} berechnet 4 Metriken.
+Sei \(n_{ij}\) die Anzahl der Pixel der Klasse \(i\) die der Klasse \(j\) zugeordnet wurden.
+
+
+\newcommand{\resulttable}[3]{
+    \begin{tabular}{l|r|r|r|r|r}%
+    \hline
+        \csvreader[head to column names, filter equal={\dataset}{#2}]{#1}{}%
+        {#3}
+        \end{tabular}
+}
+\begin{table*}
+    \resulttable{results/document_image_segmentation_results.csv}{CB55}{ \name & \pixelacc & \FgPA & \meanacc & \meanIU & \fwIU\\}
+    \resulttable{results/document_image_segmentation_results.csv}{CSG18}{  \pixelacc & \FgPA & \meanacc & \meanIU & \fwIU\\}
+    \resulttable{results/document_image_segmentation_results.csv}{CSG863}{  \pixelacc & \FgPA & \meanacc & \meanIU & \fwIU\\}
+        
+\end{table*}

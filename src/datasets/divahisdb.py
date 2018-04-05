@@ -171,7 +171,7 @@ class HisDBDataset(torch.utils.data.Dataset):
         if split is None:
             self.split = Splits.training.name
 
-        self.paths = sorted(glob(str(path / '*' / 'img' / split / '*.jpg')))
+        self.paths = sorted(glob(str(path / '*' / 'img' / self.split / '*.jpg')))
 
     def __len__(self):
         return len(self.paths)

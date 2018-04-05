@@ -25,7 +25,13 @@ Einleitung \cite{LeCunDeeplearning2015}
 \section{SGD}
 \section{CNN}
 \qq{Filter als vorläufer von CNN}
-\cite{RawatDeepConvolutionalNeural2017}
+CNN kombinieren zwei Konzepte der Bilderverarbeitung: Neuronale Netzwerke und Filter.
+Klassifikationsprobleme wurde traditionell in zwei Schritten gelöst. Zuerst wurden 
+Featuredeskriptoren entwickelt welche dann als Input für trainierbare Klassifizierer 
+verwendet wurden \autocite[2353]{RawatDeepConvolutionalNeural2017}.
+
+\qq{Filterbeispiel?}
+\qq{}
 
 \section{\cite{ChenConvolutionalNeuralNetworks2017}}
 
@@ -51,10 +57,38 @@ Das Distanzmaß \(D_s\) zu den Clusterzentren \(k=[1,K]\) basiert auf den Farbab
     D_{s}   &= d_{lab} + \frac{m}{S} d_{xy}
 \end{align}
 
+Der Faktor \(m\) ermöglicht eine Gewichtung den zwei Distanzmaßen. Je höher
+der Faktor desto kompakter werden die Superpixel. \cref{fig:slic_parameters}
+zeigt das Ergebniss des Algorithmus mit unterschiedlichen Parameter  \(m\)
+angewendet auf eine Dokumentenseite.
 
+\begin{figure}
+    \centering
+    \caption{Die SLIC-Pixelgrenzen sind in rot dargestellt }
+    \label{fig:slic_parameters}
+    \subfloat[ \(m = 0.1\)]{
+        \includegraphics[width=0.24\textwidth]{figures/img/mark_boundaries_m0.jpg}
+    }
+    \subfloat[\(m = 1\)]{
+        \includegraphics[width=0.24\textwidth]{figures/img/mark_boundaries_m1.jpg}
+    }
+    \subfloat[\(m = 10\)]{
+        \includegraphics[width=0.24\textwidth]{figures/img/mark_boundaries_m10.jpg}
+    }
+    \subfloat[\(m = 100\)]{
+        \includegraphics[width=0.24\textwidth]{figures/img/mark_boundaries_m100.jpg}
+    }
+\end{figure}
 
+\citeauthor{AchantaSLICSuperpixelsCompared2012} stellen später zwei wichtige Erweiterungen vor:
+Normalisierung des Distanzmaßes und Adaptive-SLIC.
+
+\citeauthor{ChenConvolutionalNeuralNetworks2017a} nennen keine Details zur Wahl
+der Superpixel-Parameter.
 
 \section{Xavier initialization}
+
+
 \section{Dropout}
 
 \subsection{PyTorch}
@@ -62,7 +96,7 @@ Das Distanzmaß \(D_s\) zu den Clusterzentren \(k=[1,K]\) basiert auf den Farbab
 PyTorch ist ein Framework zur automatischen Differenzierung von skaler Funktion \autocite{PaszkeAutomaticdifferentiationPyTorch2017}.
 
 \section{Training}
-\sfigure{Fehlerrate CheNet(4,4,0) während der Trainingsiterationen}{figures/plot/run_ChenNet_MNIST_log_ChenNet4_4_01522752473-tag-training_error.pdf}
+
 
 \section{\textcite{XuPageSegmentationHistorical2017}}
 \section{VGG}

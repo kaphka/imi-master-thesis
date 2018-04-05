@@ -52,11 +52,11 @@ logging.info(' logging to %s', exp.log_directory)
 # Build trainer
 iterations = 5000
 trainer = Trainer(model) \
-    .build_criterion('CrossEntropyLoss') \
+    .build_criterion('NLLLoss') \
     .build_metric('CategoricalError') \
     .build_optimizer('Adam', lr=0.001) \
-    .save_every((2000, 'iteration'), to_directory=str(exp.save_directory), checkpoint_filename='latest',
-                best_checkpoint_filename='best') \
+    .save_every((1, 'epochs')) \
+    .save_to_directory(str(exp.save_directory)) \
     .validate_every((1, 'epochs'))\
     .set_max_num_iterations(iterations) \
     .build_logger(TensorboardLogger(log_scalars_every=(1, 'iteration'),
