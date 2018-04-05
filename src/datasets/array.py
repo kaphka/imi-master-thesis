@@ -26,6 +26,8 @@ def combine(dataset, path, split='train', balance=False):
         y_train = y_train[idx]
     np.savez_compressed(path / split, x=x_train, y=y_train.astype(np.int32))
 
+def make_img_set(tile_set, path):
+    pass
 
 class Tiles(td.Dataset):
 

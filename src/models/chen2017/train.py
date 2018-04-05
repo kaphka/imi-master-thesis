@@ -24,24 +24,26 @@ std =56.83193208713197
 
 transform = transforms.Compose(
     [
+        lambda img: img.convert('L'),
         transforms.ToTensor(),
         transforms.Normalize((mean,), (std,))
     ])
 
-train_set = array.Tiles(dataset_path, transforms=transform)
+train_set = torchvision.datasets.ImageFolder(str(env.dataset('tile_img')),transform=transform)
+# train_set = array.Tiles(dataset_path, transforms=transform)
 test_set = array.Tiles(dataset_path, train=False, transforms=transform)
-train_loader = torch.utils.data.DataLoader(train_set, batch_size=64,
+train_loader = torch.utils.data.DataLoader(train_set, batch_size=32,
                                            shuffle=True, num_workers=2)
 test_loader = torch.utils.data.DataLoader(test_set, batch_size=512,
                                            shuffle=True, num_workers=2)
 
-model = Model(n_classes=4, in_channels=1, layers=4)
-exp = TrainLog(env, dataset_name, model,log_time=True)
+model = Model(n_classes=64, in_channels=1, layers=2)
+exp = TrainLog(env, 'img_folder', model,log_time=True)
 logging.info(' saving  to %s', exp.save_directory)
 logging.info(' logging to %s', exp.log_directory)
 
 # Build trainer
-max_num_iterations = 5000
+max_num_iterations = 10000
 trainer = Trainer(model) \
     .build_criterion('NLLLoss') \
     .build_metric('CategoricalError') \
@@ -49,7 +51,7 @@ trainer = Trainer(model) \
     .save_every((1, 'epochs')) \
     .save_to_directory(str(exp.save_directory))\
     .validate_every((2, 'epochs'))\
-    .set_max_num_epochs(10) \
+    .set_max_num_epochs(100) \
     .build_logger(TensorboardLogger(log_scalars_every=(1, 'iterations'),
                                     log_images_every='never'),
                   log_directory=str(exp.log_directory))

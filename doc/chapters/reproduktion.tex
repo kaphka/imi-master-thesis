@@ -27,7 +27,6 @@ Das zweite Experiment basiert auf der Forschung des Gewinners des IDCAR2017-Wett
 \section{Bildverarbeitung mittels Neuronaler Netzwerke}
 Einleitung \cite{LeCunDeeplearning2015}
 
-
 \section{SGD}
 \section{Aktivierungsfunktionen}
 \subsection{ReLU}
@@ -48,18 +47,17 @@ verwendet wurden \autocite[2353]{RawatDeepConvolutionalNeural2017}.
 \qq{}
 
 \section{\textcite{ChenConvolutionalNeuralNetworks2017}}
-Das Paper ``\citetitle*{ChenConvolutionalNeuralNetworks2017}'' von \citeauthor*{ChenConvolutionalNeuralNetworks2017}.
+Das Paper ``\citetitle*{ChenConvolutionalNeuralNetworks2017}'' von \citeauthor*{ChenConvolutionalNeuralNetworks2017} betrachten die Dokumentensegmentierung 
+als ``pixel labeling problem''. Einem Pixel wird eine Klasse zugewiesen indem
+ein CNN die Umgebung des Pixels analisiert. 
+Jedoch ist eines der größten Probleme bei der Verarbeitung von Dokumentenseiten die Größe.
+Die Bilder im HisDB-Datenset sind mit einer Auflösung von \(4872 \times 6496\) wesentlich größer als andere Datensets.\qq{Welche?}
+Um den Prozess zu beschleunigen werden nicht alle Pixel sondern nur etwa 3000 Pixelcluster klassifiziert. 
 
 \subsection{Vorverarbeitung}
-Eine der ersten Probleme bei der Verarbeitung von Dokumentenseiten ist ihre Größe.
-Die Bilder im HisDB-Datenset sind mit einer Auflösung von \(4872 \times 6496\) wesentlich größer als andere Datensets.\qq{Welche?}
-
-\citeauthor{ChenConvolutionalNeuralNetworks2017} skalieren deshalb alle Bilder mit einem Faktor von  \(2^{-3}\) und wenden dann den Superpixelalgorithmus SLIC (simple linerar iterative clustering) an
-\autocite{AchantaSLICSuperpixels2010} um die Dokumentenseiten in Superpixel einzuteilen.
+\citeauthor{ChenConvolutionalNeuralNetworks2017} skalieren alle Bilder mit einem Faktor von  \(2^{-3}\) und wenden dann den Superpixelalgorithmus SLIC (simple linerar iterative clustering) an \parencite{AchantaSLICSuperpixels2010} um die Dokumentenseiten in Superpixel einzuteilen.
 Ein \(28 \times 28\)-Bereich um das Zentrum des Superpixel wird dann mithilfe eines CNN
 klassifiziert. Diese Klassifizierung wird dann allen Pixel innerhalb des Superpixels zugewiesen.
-
-Während des Trainings wird das Ground-truth Label des Zentrumpixels als Label für den Superpixel verwendet.
 
 \section{SLIC Superpixel}
 Der SLIC-Algorithmus basiert auf dem k-Means-Algorithmus und teilt Pixel inhalb eines 5D-Raums in Cluster ein. 
@@ -100,6 +98,13 @@ Normalisierung des Distanzmaßes und Adaptive-SLIC.
 
 \citeauthor{ChenConvolutionalNeuralNetworks2017a} nennen keine Details zur Wahl
 der Superpixel-Parameter.
+
+\section{CNN-Architektur}
+\citeauthor{ChenConvolutionalNeuralNetworks2017a} beschreiben die Struktur
+des CNN als \(28 \times 28 \times 1 - 26 \times 26 \times 4 - 100 - M\).
+
+Während des Trainings wird das Ground-truth Label des Zentrumpixels als Label für den Superpixel verwendet.
+
 
 \section{Xavier initialization}
 

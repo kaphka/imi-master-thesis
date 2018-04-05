@@ -38,7 +38,7 @@ class ChenNet(nn.Module):
         self.conv = nn.Sequential()
         out_channels = kernels
 
-        self.dropout = nn.Dropout()
+        self.dropout = nn.Dropout(0.7)
         for n in range(layers):
             # self.conv.add_module('dropout', self.dropout)
             self.conv.add_module('conv' + str(n), nn.Conv2d(in_channels, out_channels, 3))
@@ -47,7 +47,7 @@ class ChenNet(nn.Module):
             out_channels += 2
 
         # self.maxpool = nn.MaxPool2d(max_pool_size)
-        self.out_dim = list(self.conv.children())[-1].out_channels * ((tensor_width - layers * 2) ** 2)
+        self.out_dim = (out_channels-2) * ((tensor_width - layers * 2) ** 2)
 
         self.classifier = nn.Sequential(
             self.dropout,
