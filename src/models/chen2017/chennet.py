@@ -19,6 +19,9 @@ class ChenNet(nn.Module):
         if type(m) == nn.Linear:
             torch.nn.init.xavier_uniform(m.weight)
             m.bias.data.fill_(0.01)
+        if type(m) == nn.Conv2d:
+            torch.nn.init.xavier_uniform(m.weight)
+            m.bias.data.fill_(0.01)
 
     def block(self):
         return nn.Sequential(
