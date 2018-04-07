@@ -4,14 +4,19 @@
 
 \qq{Warum NN?}
 Künstliche Neuronale Netzwerke (kurz NN) dominieren den Forschungsbereich der 
-Bilderkennung dank vieler Erfolge. 
+Bilderkennung. 
 Besonders die Klasse der faltenden Neuronalen Netzwerks (engl. Convolutional Neural Network, kurz CNN) konnte viele Erfolge für sich beanspruchen.
-Rekordbrechende Erfolge bei der Klassifiziererung von handgeschriebenen Ziffern \parencite{LeCunBackpropagationappliedhandwritten1989} und des ImageNet-Wettbewerbs \parencite{KrizhevskyImageNetClassificationDeep2012a} motivieren dazu CNN-Methoden auch in anderen
+Rekordbrechende Ergebnisse bei der Klassifiziererung von handgeschriebenen Ziffern \parencite{LeCunBackpropagationappliedhandwritten1989} und des ImageNet-Wettbewerbs \parencite{KrizhevskyImageNetClassificationDeep2012a} motivieren dazu CNN-Methoden auch in anderen
 Bereichen anzuwenden.
 
+\begin{marginfigure}
+    \includegraphics[width=\textwidth]{figures/tasks/nn_areas_venn.pdf}
+    \caption{Diziplinen im Bereich Neurale Netzwerke}
+    \label{fig:chen:cnn_task}
+\end{marginfigure}
 Neurale Netzwerke benötigen weniger Entwicklungsaufwand und können zudem einfacher von der 
 von wachsenden Resourzen und Datenmengen gebrauch machen \parencite[436]{LeCunDeeplearning2015}. 
-Aber die Wissenschaft der NN ist ein Feld, dass durch die aktuelle Praxis mehr als durch Theorie geprägt ist. Das beudeuted zum einen das theoretische Grundlagen noch nicht gefestigt sind.
+Aber die Wissenschaft der NN ist ein Feld, dass durch die aktuelle Praxis mehr als durch Theorie geprägt ist. Das bedeuted zum einen das theoretische Grundlagen noch nicht gefestigt sind.
 Zum anderen ist die Theorie nur eine Faktor für den erfolgreichen Einsatz von NNs. 
 
 Je mehr Parameter unklar sind desto schwieriger wird eine Reproduktion.
@@ -24,9 +29,18 @@ Das erste Experiment basiert auf dem neusten Paper von Mitgliedern der DIVA-Grup
 \qq{welche Experimente?}
 Das zweite Experiment basiert auf der Forschung des Gewinners des IDCAR2017-Wettbewerbs: \citeauthor*{XuPageSegmentationHistorical2017} 
 
+\section{Andere Ansätze}
+\cite{WickFullyConvolutionalNeural2017}
+
+
 \section{Bildverarbeitung mittels Neuronaler Netzwerke}
 Einleitung \cite{LeCunDeeplearning2015}
 
+\begin{marginfigure}
+    \includegraphics[width=\textwidth]{figures/tasks/chen_examples.pdf}
+    \caption{TODO}
+    \label{fig:chen:cnn_task}
+\end{marginfigure}
 \section{SGD}
 \section{Aktivierungsfunktionen}
 \subsection{ReLU}
@@ -97,7 +111,12 @@ angewendet auf eine Dokumentenseite.
 Normalisierung des Distanzmaßes und Adaptive-SLIC.
 
 \citeauthor{ChenConvolutionalNeuralNetworks2017a} nennen keine Details zur Wahl
-der Superpixel-Parameter.
+der Superpixel-Parameter, nennen aber eine frühere Studie die sich mit unterschiedlichen 
+Superpixel verfahren beschäftigt \parencite{ChenPageSegmentationHistorical2016}.
+Die Studie versucht einen Autoencoder (siehe \ref{sec:autoencoder}) zu trainieren auf Basis von Superpixeln und vergleicht dabei den Einfluss von unterschiedlichen Superpixel-Methoden. Die veröffenlichen Ergebniss zeigen aber nur die Performanz im Bezug
+auf die Zahl der Cluster \(n \in \left\{10^3, 50^3, 100^3, 200^3\right\}\) und dem Skalierungsfaktor \(\alpha \in \left\{2^{-2}, 2^{-3}\right\}\)
+\qq{adaptive slic}
+\qq{Problem gt zu treffen}
 
 \section{CNN-Architektur}
 \citeauthor{ChenConvolutionalNeuralNetworks2017a} beschreiben die Struktur
@@ -111,15 +130,15 @@ Während des Trainings wird das Ground-truth Label des Zentrumpixels als Label f
 
 \section{Dropout}
 
-\subsection{PyTorch}
-% Genauer klären
-PyTorch ist ein Framework zur automatischen Differenzierung von skaler Funktion \autocite{PaszkeAutomaticdifferentiationPyTorch2017}.
+
 
 \section{Training}
 
 
 \section{\textcite{XuPageSegmentationHistorical2017}}
-Das Paper ``\citetitle*{XuPageSegmentationHistorical2017}'' von \citeauthor*{XuPageSegmentationHistorical2017}.
+Das Paper \citetitle*{XuPageSegmentationHistorical2017} von \citeauthor*{XuPageSegmentationHistorical2017} verfolgt einen anderen Ansatz.
+\citeauthor{XuPageSegmentationHistorical2017} verwenden eine Netwerk  
+
 
 \section{VGG}
 \section{Deconvolution}
