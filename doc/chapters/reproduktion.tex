@@ -1,11 +1,11 @@
 \chapter{Reproduktion bisheriger Ergebnisse}
 \label{chap:reproduktion}
-\epigraph{What I cannot create, I do not understand}{--- Richarch Feyman}
+\epigraph{What I cannot create, I do not understand}{--- Richard Feyman}
 
 \qq{Warum NN?}
 Künstliche Neuronale Netzwerke (kurz NN) dominieren den Forschungsbereich der 
 Bilderkennung. 
-Besonders die Klasse der faltenden Neuronalen Netzwerks (engl. Convolutional Neural Network, kurz CNN) konnte viele Erfolge für sich beanspruchen.
+Besonders die Klasse der faltenden Neuronalen Netzwerks \engl{convolutional neural network}, kurz CNN, konnte viele Erfolge für sich beanspruchen.
 Rekordbrechende Ergebnisse bei der Klassifiziererung von handgeschriebenen Ziffern \parencite{LeCunBackpropagationappliedhandwritten1989} und des ImageNet-Wettbewerbs \parencite{KrizhevskyImageNetClassificationDeep2012a} motivieren dazu CNN-Methoden auch in anderen
 Bereichen anzuwenden.
 
@@ -14,19 +14,19 @@ Bereichen anzuwenden.
     \caption{Diziplinen im Bereich Neurale Netzwerke}
     \label{fig:chen:cnn_task}
 \end{marginfigure}
-Neurale Netzwerke benötigen weniger Entwicklungsaufwand und können zudem einfacher von der 
-von wachsenden Resourzen und Datenmengen gebrauch machen \parencite[436]{LeCunDeeplearning2015}. 
-Aber die Wissenschaft der NN ist ein Feld, dass durch die aktuelle Praxis mehr als durch Theorie geprägt ist. Das bedeuted zum einen das theoretische Grundlagen noch nicht gefestigt sind.
+Neurale Netzwerke benötigen weniger Entwicklungsaufwand und können zudem einfacher von 
+ wachsenden Rechenkapazitäten und Datenmengen gebrauch machen \parencite[436]{LeCunDeeplearning2015}. 
+Aber die Wissenschaft der NN ist ein Feld, dass durch die aktuelle Praxis mehr als durch Theorie geprägt ist. 
+Das bedeuted zum einen das theoretische Grundlagen noch nicht gefestigt sind.
 Zum anderen ist die Theorie nur eine Faktor für den erfolgreichen Einsatz von NNs. 
-
 Je mehr Parameter unklar sind desto schwieriger wird eine Reproduktion.
-Im folgenden werden Paper genauer untersucht, die sich mit dem Problem der Dokumentensegmentierung mit Hilfe von 
+\qq{Unterschied replikation, reproduktion?}
+Die Reproduktion von Ergebnissen ist aber ein wichtiger Bestandteil in jedem Forschungsgebiet. 
 
-Die Reproduktion ist ein wichtiger Bestandteil in jedem Forschungsgebiet. 
-
-
-Das erste Experiment basiert auf dem neusten Paper von Mitgliedern der DIVA-Gruppe: \citeauthor*{ChenConvolutionalNeuralNetworks2017}. 
 \qq{welche Experimente?}
+Im folgenden werden Paper genauer untersucht, die sich mit dem Problem der Dokumentensegmentierung mit Hilfe von CNNs nähern.
+Das erste Experiment basiert auf dem neusten Paper von Mitgliedern der DIVA-Gruppe: \citeauthor*{ChenConvolutionalNeuralNetworks2017}. 
+
 Das zweite Experiment basiert auf der Forschung des Gewinners des IDCAR2017-Wettbewerbs: \citeauthor*{XuPageSegmentationHistorical2017} 
 
 \section{Andere Ansätze}
@@ -34,8 +34,14 @@ Das zweite Experiment basiert auf der Forschung des Gewinners des IDCAR2017-Wett
 
 
 \section{Bildverarbeitung mittels Neuronaler Netzwerke}
-Einleitung \cite{LeCunDeeplearning2015}
+Neurale Netwerke und CNN sind Beispiele für Machinenlernalgorithmen \engl{maschine learning algorithm}.
+\cite{MitchellMachinelearning1997} definiert einen Machinenlernalgorithmus wie folgt: ``A computer program is said to learn from experience E with respect to some class of tasks T and perfomance measure P, if its performance at tasks T, as measured by P improves with experience E''.
 
+Für die meisten Anwendungen ist die Aufgabe T eine Klassifizierungsaufgabe.
+Der Lernalgorithmus soll eine Funktion \(f: \mathds{R}^n \Leftarrow \left\{1,\dots,k \right\} \) so das \(y = f\left(x\right)\) \cite[97]{GoodfellowDeeplearning2016}.
+
+
+\cite[393]{Hastieelementsstatisticallearning2009}: linear Kombinationen der Eingabe as Features. Target als nonlineare Funktion dieser Features modelieren.  
 \begin{marginfigure}
     \includegraphics[width=\textwidth]{figures/tasks/chen_examples.pdf}
     \caption{TODO}
