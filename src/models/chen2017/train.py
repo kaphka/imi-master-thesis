@@ -10,7 +10,7 @@ from inferno.trainers.basic import Trainer
 from inferno.trainers.callbacks.logging.tensorboard import TensorboardLogger
 
 from models.chen2017.chennet import ChenNet as Model
-import datasets.array as array
+import datasets.tiles as tiles
 from experiment.data import Environment, TrainLog
 import logging
 logging.basicConfig(level=logging.INFO)
@@ -31,7 +31,7 @@ transform = transforms.Compose(
 
 train_set = torchvision.datasets.ImageFolder(str(env.dataset('tile_img')),transform=transform)
 # train_set = array.Tiles(dataset_path, transforms=transform)
-test_set = array.Tiles(dataset_path, train=False, transforms=transform)
+test_set = tiles.Tiles(dataset_path, train=False, transforms=transform)
 train_loader = torch.utils.data.DataLoader(train_set, batch_size=32,
                                            shuffle=True, num_workers=2)
 test_loader = torch.utils.data.DataLoader(test_set, batch_size=512,

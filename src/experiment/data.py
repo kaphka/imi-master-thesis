@@ -2,7 +2,7 @@ from pathlib import Path
 import json
 import time
 import enum
-
+import networkx as nx
 
 class Datasets(enum.Enum):
     diva = 'DIVA-HisDB'
@@ -12,9 +12,10 @@ class Datasets(enum.Enum):
 
 class Environment(object):
 
-    def __init__(self, conf="~/.thesis.conf"):
+    def __init__(self, conf="~/.thesis.conf",name=None):
         conv_path = Path("~/.thesis.conf").expanduser()
         self.config = json.load(conv_path.open())
+
 
 
     @property

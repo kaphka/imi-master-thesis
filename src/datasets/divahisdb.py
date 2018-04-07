@@ -185,7 +185,7 @@ class HisDBDataset(torch.utils.data.Dataset):
 
         if self.gt:
             # only load one channel
-            gt_arr = load_pixel_label(gt_file)
+            gt_arr = numeric_gt(load_pixel_label(gt_file))
         else: 
             gt_arr = None
 
