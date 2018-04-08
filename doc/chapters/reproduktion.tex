@@ -37,11 +37,14 @@ Das zweite Experiment basiert auf der Forschung des Gewinners des IDCAR2017-Wett
 Neurale Netwerke und CNN sind Beispiele für Machinenlernalgorithmen \engl{maschine learning algorithm}.
 \cite{MitchellMachinelearning1997} definiert einen Machinenlernalgorithmus wie folgt: ``A computer program is said to learn from experience E with respect to some class of tasks T and perfomance measure P, if its performance at tasks T, as measured by P improves with experience E''.
 
-Für die meisten Anwendungen ist die Aufgabe T eine Klassifizierungsaufgabe.
-Der Lernalgorithmus soll eine Funktion \(f: \mathds{R}^n \Leftarrow \left\{1,\dots,k \right\} \) so das \(y = f\left(x\right)\) \cite[97]{GoodfellowDeeplearning2016}.
+Für die meisten Anwendungen ist die Aufgabe T eine Klassifizierungsaufgabe. 
+Jeder Eingabe \(x\) ist eine Klasse \(y\) aus \(k\) unterschiedlichen Labels zugeordnet. 
+Der Lernalgorithmus soll eine Funktion finden \(f: \mathds{R}^n \rightarrow \left\{1,\dots,k \right\} \) so das \(y = f\left(x\right)\) \parencite[97 ff]{GoodfellowDeeplearning2016}.
+Der Algorithmus versucht die Wahrscheinlichkeitsverteilung \(p(y | x)\)
+Ein Lernalgorithmus der diese Funktion findet ist ein überwachter Lernalgorithmus \engl{supervised learning algorithm}
 
+\cite[393]{Hastieelementsstatisticallearning2009}: lineare Kombinationen der Eingabe as Features. Target als nonlineare Funktion dieser Features modelieren.  
 
-\cite[393]{Hastieelementsstatisticallearning2009}: linear Kombinationen der Eingabe as Features. Target als nonlineare Funktion dieser Features modelieren.  
 \begin{marginfigure}
     \includegraphics[width=\textwidth]{figures/tasks/chen_examples.pdf}
     \caption{TODO}
