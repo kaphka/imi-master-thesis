@@ -6,6 +6,7 @@ import random
 from PIL import Image
 import numpy as np
 
+
 def task(env):
     split = diva.Splits.training.name
     dataset = diva.HisDBDataset(env.dataset(diva.NAME), gt=True, split=split)
@@ -26,6 +27,7 @@ def task(env):
     store(crop_gt(Image.fromarray(gt)), 'gt0.png')
 
     gt = Image.open(tiles_path/'gt0.png')
+
 
 def test(env):
     tile_set = tile.ImgTiles(env.dataset(tile.TILE_SET_NAME))

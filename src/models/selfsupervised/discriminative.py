@@ -12,9 +12,9 @@ import torch.nn.functional as F
 import torch.optim as optim
 import torchvision
 import torchvision.transforms as transforms
-
-
 import models.net as base
+
+NAME = 'codices_surrogate'
 
 def triplet_loss(input, target, weight=None, size_average=True):
     '''
