@@ -45,13 +45,22 @@ Ein Lernalgorithmus der diese Funktion findet ist ein überwachter Lernalgorithm
 
 \cite[393]{Hastieelementsstatisticallearning2009}: lineare Kombinationen der Eingabe as Features. Target als nonlineare Funktion dieser Features modelieren.  
 
+\begin{align}
+    \hat { y } = w^{ \top } x + b
+\end{align}
+
 \begin{marginfigure}
     \includegraphics[width=\textwidth]{figures/tasks/chen_examples.pdf}
     \caption{TODO}
     \label{fig:chen:cnn_task}
 \end{marginfigure}
 \section{SGD}
+
 \section{Aktivierungsfunktionen}
+\begin{align}
+    \operatorname{softmax}(z)_{i}=\frac{\exp\left(z_{i}\right)}{ \sum _ { j } \exp \left( z _ { j } \right) }
+\end{align}
+
 \subsection{ReLU}
 \begin{align}
     f\left(x\right) &= \text{max}(0,x)
