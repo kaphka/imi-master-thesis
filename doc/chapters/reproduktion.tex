@@ -33,15 +33,44 @@ Das zweite Experiment basiert auf der Forschung des Gewinners des IDCAR2017-Wett
 \cite{WickFullyConvolutionalNeural2017}
 
 
-\section{Bildverarbeitung mittels Neuronaler Netzwerke}
-Neurale Netwerke und CNN sind Beispiele für Machinenlernalgorithmen \engl{maschine learning algorithm}.
+\section{Einführung Maschinelles Lernen}
+Neurale Netwerke und CNN sind Beispiele für Machinenlernalgorithmen \engl{maschine learning algorithms}.
 \cite{MitchellMachinelearning1997} definiert einen Machinenlernalgorithmus wie folgt: ``A computer program is said to learn from experience E with respect to some class of tasks T and perfomance measure P, if its performance at tasks T, as measured by P improves with experience E''.
 
-Für die meisten Anwendungen ist die Aufgabe T eine Klassifizierungsaufgabe. 
-Jeder Eingabe \(x\) ist eine Klasse \(y\) aus \(k\) unterschiedlichen Labels zugeordnet. 
-Der Lernalgorithmus soll eine Funktion finden \(f: \mathds{R}^n \rightarrow \left\{1,\dots,k \right\} \) so das \(y = f\left(x\right)\) \parencite[97 ff]{GoodfellowDeeplearning2016}.
-Der Algorithmus versucht die Wahrscheinlichkeitsverteilung \(p(y | x)\)
+% experience E 
+Die Erfahrung E kann zum Beispiel ein Datensatz \(X\) mit zugehörigen Klassen
+\(Y\) sein. Im Fall der Dokumentensegmentierung kann ein Element \(x_i\) ein Bildauschnitt sein, 
+dessen Kategorisierung ist dann das Label \(y_i\)(siehe \cref{fig:chen:cnn_task}).
+\begin{marginfigure}
+    \includegraphics[width=\textwidth]{figures/tasks/chen_examples.pdf}
+    \caption{Bildauschnitt mit ground ground truh (0: Hintergrund, 3: Haupttext)}
+    \label{fig:chen:cnn_task}
+\end{marginfigure}
+
+% Task T 
+Die Aufgabe T ist für die meisten Anwendungen eine Klassifizierungsaufgabe. 
+Der Lernalgorithmus soll dabei eine Funktion finden \(f: \mathds{R}^n \rightarrow \left\{1,\dots,k \right\} \) so das \(y = f\left(x\right)\) \parencite[97 ff]{GoodfellowDeeplearning2016}.
 Ein Lernalgorithmus der diese Funktion findet ist ein überwachter Lernalgorithmus \engl{supervised learning algorithm}
+Der Algorithmus versucht die Wahrscheinlichkeitsverteilung \(p(y | x)\) implizit zu ``lernen''. Ein unüberwachter Lernalgorithmus versucht die Verteilung \(p(x)\) direkt zu lernen.
+Die Trennung zwischen überwacht und unüberwacht ist nur eine grobe Einteilung. Tätsächlich sind die übergänge fließend. 
+Manche Machinenlernverfahren benutzen beide Methoden.  
+
+% perfrmance P
+Die Performanz P der Vorhersagefunktion \(f\) wird im einfachsten Fall mit der Genauigkeit,
+dem Verhähltniss von richtigen Vorhersage zu Falschen, gemessen. 
+% TODO: Tabelle
+\cref{tab:truth}
+\begin{table}
+    \caption{Wahrheitstabelle}
+    \label{tab:truth}
+    \begin{tabular}{llll}
+                    &&\(y\)& \\
+                            && Positiv       & Negativ \\
+    \(\hat{y}\) & Positiv  & true positive  & false positive \\
+                & Negativ & false negatve   & true negatve \\
+    \end{tabular}       
+\end{table}    
+\section{Neuronale Netzwerke}
 
 \cite[393]{Hastieelementsstatisticallearning2009}: lineare Kombinationen der Eingabe as Features. Target als nonlineare Funktion dieser Features modelieren.  
 
@@ -49,11 +78,7 @@ Ein Lernalgorithmus der diese Funktion findet ist ein überwachter Lernalgorithm
     \hat { y } = w^{ \top } x + b
 \end{align}
 
-\begin{marginfigure}
-    \includegraphics[width=\textwidth]{figures/tasks/chen_examples.pdf}
-    \caption{TODO}
-    \label{fig:chen:cnn_task}
-\end{marginfigure}
+
 \section{SGD}
 
 \section{Aktivierungsfunktionen}
@@ -67,6 +92,8 @@ Ein Lernalgorithmus der diese Funktion findet ist ein überwachter Lernalgorithm
 \end{align}
 \subsection{Softmax}
 
+\subsection{Regularisierung}
+\label{sec:Regularisierung}
 
 \section{CNN}
 \qq{Filter als vorläufer von CNN}
