@@ -70,13 +70,20 @@ dem Verhähltniss von richtigen Vorhersage zu Falschen, gemessen.
                 & Negativ & false negatve   & true negatve \\
     \end{tabular}       
 \end{table}    
-\section{Neuronale Netzwerke}
+\section{Künstliche Neuronale Netzwerke}
 
-\cite[393]{Hastieelementsstatisticallearning2009}: lineare Kombinationen der Eingabe as Features. Target als nonlineare Funktion dieser Features modelieren.  
+Künstliche Neurale Netwerke sind eine Methode des statistischen Lernens die von der Natur inspiriert wurde. 
+Das Neuron ist der Grundbaustein eines Netwerkes und verarbeitet eingehende Signale. 
+Nur ein Signal wird
 
 \begin{align}
     \hat { y } = w^{ \top } x + b
 \end{align}
+
+\begin{align}
+    f(X)=\sum\limits_{m=1}^{M}g_{m}\left(\omega_{m}^{\top}X\right)
+   \end{align}
+Target als nonlineare Funktion dieser Features modelieren.  
 
 
 \section{SGD}
@@ -85,6 +92,11 @@ dem Verhähltniss von richtigen Vorhersage zu Falschen, gemessen.
 \begin{align}
     \operatorname{softmax}(z)_{i}=\frac{\exp\left(z_{i}\right)}{ \sum _ { j } \exp \left( z _ { j } \right) }
 \end{align}
+% TODO: set font size??? 
+\begin{figure}
+    \caption{ReLU- und Sigmoid-Funktionsplot}
+    \includegraphics[width=\textwidth]{figures/plot/relu_sigmoid.pdf}
+\end{figure}
 
 \subsection{ReLU}
 \begin{align}
