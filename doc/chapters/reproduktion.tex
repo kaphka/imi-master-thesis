@@ -108,12 +108,48 @@ Target als nonlineare Funktion dieser Features modelieren.
 \label{sec:Regularisierung}
 
 \section{CNN}
-\qq{Filter als vorläufer von CNN}
+\qq{Nachtteile fully connected NN für Bilderverarbeitung}
+Die Anzahl der Parameter in der Gewichtsmatrix \(W\) wird von der Größe des Inputs bestimmt.
+Möchte man Bilder ein Bild mit der der 
+
+\qq{Sind Filter vorläufer von CNN?}
 CNN kombinieren zwei Konzepte der Bilderverarbeitung: Neuronale Netzwerke und Filter.
 Klassifikationsprobleme wurde traditionell in zwei Schritten gelöst. Zuerst wurden 
 Featuredeskriptoren entwickelt welche dann als Input für trainierbare Klassifizierer 
 verwendet wurden \autocite[2353]{RawatDeepConvolutionalNeural2017}.
 
+
+\qq{Was ist convolutional?}
+So können zum Beipspiel Kanten in einem Bild ein Klassifizerungsgrundbaustein sein. 
+Um die Kanten in einem Bild zu finden wird das Bild mit einem Kernel  gefaltet.  
+Der Begriff Faltung wird üblicherweise für die Verknüpfung von zwei realwertigen Funktione verwendet. Die analoge Form der Faltung ist eine lineare , translations-invariante Funktion, siehe \cite[28]{SusseBildverarbeitungundObjekterkennung2014}. 
+\begin{align}
+    \label{eq:convolutional}
+    convolutional
+\end{align}
+Im Bereich der Bilderverarbeitung wird schon länger eine abgeänderte Faltungsfunktion genutzt: die Autokorrelation \engl{cross-correlation}. Bild und Filter sind 2D-Funktionen die zum einen nur für diskrete Intervale definiert sind zum anderen für Bereiche aushalb des ihres Definitionsbereichs gleich 0 sind. Zudem wird überlicherweise der Index für den Kernel addiert (siehe \cref{eq:convolutional}).
+\begin{align}
+    \label{eq:crosscorrelation}
+    I*K(i,j) =
+\end{align}
+
+
+Ein CNN ist eine Neurales Netzwerk, dass in mindesten einen Layer die Faltung anstatt der normalen Matrixmultiplikation verwendet \parencite[321]{GoodfellowDeeplearning2016}.
+\qq{Drei Hauptvorteile?}
+\cite{GoodfellowDeeplearning2016} sieht drei Vorteile von CNN gegenüber voll-vernetzten NN: verringerte Konnektivität, 
+gemeinsame Parameternutzung, eqivariante Darstellung.
+Wie schon erwahnt steigt die Anzahl der Parameter in einem voll-vernetzten NN je größer der Input wird, weil jedes Neuron mit jeder Aktivierung der vorhergehenden Schicht verbunden ist. 
+Durch die Faltungssoperation erhählt jedes Neuron nur die Signale die im Bereich des Filterkernels liegen. Dieser Bereich wird auch rezeptives Feld genannnt.
+Durch die Schichtung von mehreren Faltungen vergrößert sich das rezeptive Feld der Neuronen in tieferen Schichten (siehe \cref{fig:cnn_neurons}).
+
+
+\begin{marginfigure}
+    \label{fig:cnn_neurons}
+    \includegraphics[width=\textwidth]{figures/sketch/cnn/perceptive_field.pdf}
+    \caption{Rezeptives Feld in einem mehrschichtigen Netz}
+\end{marginfigure}
+
+\qq{Nachteile CNN?}
 \qq{Filterbeispiel?}
 \qq{}
 
