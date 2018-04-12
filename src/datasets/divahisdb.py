@@ -161,8 +161,9 @@ class HisDBDataset(torch.utils.data.Dataset):
         # zipfile = ZipFile(str(zippath))
         pass
 
-    def __init__(self, path, transform=None, download=True, split=None, gt=False):
+    def __init__(self, path, transform=None, download=True, split=None, gt=False,label_boundary=True):
         self.gt = gt
+        self.label_boundary = label_boundary
         for set_name in SET_NAMES:
             folder = path / set_name
             folder.mkdir(exist_ok=True)
@@ -195,7 +196,7 @@ class HisDBDataset(torch.utils.data.Dataset):
 
         if self.gt:
             # only load one channel
-            gt_arr = numeric_gt(load_pixel_label(gt_file))
+            gt_arr = numeric_gt(load_pixel_label(gt_file), self.label_boundary)
         else: 
             gt_arr = None
 
