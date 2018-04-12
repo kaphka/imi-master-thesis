@@ -85,6 +85,20 @@ Die Manuskripte wurden mit einer Auflösung von 600 dpi gescannt und sind im  JP
 
 Der Datensatz wurde semi-automatisch mit 3 Annotation (Haupttext, Kommentare, Dekorationen) versehen.
 Diese Ground-Truth-Annotationen sind im PAGE-XML-Format und als ``pixel-label'' PNG-Bilder gespeichert.
+Die \cref{fig:ground_truth} zeigt eine Beispielseite mit den zugehörgine Labels auf Pixelebene. 
+
+\begin{figure*}
+    \centering
+    \caption{Hintergrund: weiss, Haupttext: blau, Kommentare: grün, Dekorationen: rot }
+    \label{fig:ground_truth}
+    \subfloat[Dokumentenbild]{
+        \includegraphics[width=0.5\textwidth]{figures/datasets/gt_example0.jpeg}
+    }
+    \subfloat[``pixel-label'' ]{
+        \includegraphics[width=0.5\textwidth]{figures/datasets/gt_example1.jpeg}
+    }
+\end{figure*}
+
 Die Menge an Pixeln pro Klasse ist sehr unterschiedlich.
 Die \cref{table:class_distribution} zeigt das in jedem Dokumentenset der Hintergrund deutlich überwiegt.
 
@@ -97,6 +111,7 @@ Die \cref{table:class_distribution} zeigt das in jedem Dokumentenset der Hinterg
         {\set&	\background & \comments & \decoration & \text \\}
     \end{tabular}
 \end{table}
+
 
 
 \begin{table*}
