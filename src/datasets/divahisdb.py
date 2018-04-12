@@ -45,6 +45,14 @@ LABEL_DICT = {
     2: Annotations.COMMENT,
     3: Annotations.BODY_TEXT
 }
+LABEL_COLORS = {
+    0: [255, 255, 255],
+    1: [255, 0, 0],
+    2: [0, 255, 0],
+    3: [0, 0, 255],
+}
+
+
 def label_to_code(label):
     return LABEL_DICT[label]
 
@@ -129,10 +137,12 @@ def change_diva_path(p, set=None, split=None, ext=None, data_format=None):
 def color_gt(gt, show_boundary=False):
     render = np.ones((gt.shape[0], gt.shape[1], 3), dtype=np.ubyte) * 255
     # render[(gt & BOUNDARY).astype(bool)]
-    render[gt == Annotations.BACKGROUND] = [255, 255, 255]
-    render[(gt == Annotations.BODY_TEXT).astype(bool)] = [0, 0, 255]
-    render[(gt == Annotations.COMMENT).astype(bool)] = [0, 255, 0]
-    render[(gt == Annotations.DECORATION).astype(bool)] = [255, 0, 0]
+    for id, color in LABEL_COLORS.items():
+        render[gt == id] = color
+    # render[gt == Annotations.BACKGROUND] = [255, 255, 255]
+    # render[(gt == Annotations.BODY_TEXT).astype(bool)] = [0, 0, 255]
+    # render[(gt == Annotations.COMMENT).astype(bool)] = [0, 255, 0]
+    # render[(gt == Annotations.DECORATION).astype(bool)] = [255, 0, 0]
     if show_boundary:
         render[(gt & BOUNDARY).astype(bool)] = [100, 100, 100]
     return render
