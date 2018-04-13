@@ -33,7 +33,7 @@ def get_central_labels(scaled_gt, tile_specs):
 def task(env):
     n_patches = 0
     scaler = Scale()
-    slic = SLIC(n_segments=3000, slic_zero=True)
+    slic = SLIC(n_segments=3000, compactness=27)
     get_tiles = SegmentTiling()
     get_gt = TileGroundTruth()
     for dataset in tqdm(datasets):
@@ -80,5 +80,5 @@ def task(env):
 
 if __name__ == '__main__':
     env = Environment()
-    logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig(level=logging.INFO)
     task(env)

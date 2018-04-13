@@ -10,7 +10,16 @@ Die neuronalen Netze wurden mithilfe von PyTorch umgesetzt.
 PyTorch ist ein Framework zur automatischen Differenzierung von skalarer Funktion \autocite{PaszkeAutomaticdifferentiationPyTorch2017}.
 \label{chap:umsetzung}
 \section{Chen}
-SLIC Paramter nicht spezifiziert 
+\citeauthor{ChenConvolutionalNeuralNetworks2017a} nennen nicht die genaue Zahl des Verwendeten Kompaktheitsparameter m (siehe \cref{sec:slic}). 
+Die Konfiguration der Superpixel setzt aber eine Obergrenze für die maximal erreichbare Genauigkeit.
+Um den besten Paramter zu finden wurde die Bilder mit der Vorbearbeitungsmethode von \citeauthor{ChenConvolutionalNeuralNetworks2017a} in Superpixel aufgeteilt. 
+Die Klassifizierung der Pixel wurde direkt aus der ground truth übernommen.
+Dieser Vorgang wurde für 10 zufällige Bilder des DIVA-Datensatzes wiederholt und ein Durchschnitt gebildet.
+
+\sfigure{Maximale Genauhigkeit in Abhängigkeit von m}{figures/datasets/slic_hyperparameter.pdf}
+
+
+
 aslic?
 Netz Lernt, aber nur MNIST
 \sfigure{Fehlerrate CheNet(4,4,0) während der Trainingsiterationen}{figures/plot/run_ChenNet_MNIST_log_ChenNet4_4_01522892733-tag-training_error.pdf}
