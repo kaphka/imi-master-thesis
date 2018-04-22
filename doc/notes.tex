@@ -65,4 +65,19 @@ argmax task
 \section{Notes}
 \section{CNN}
 \cite{GoodfellowDeeplearning2016}
+
+\section{Umsetzung Notizen}
+
+\cite{DosovitskiyDiscriminativeUnsupervisedFeature2016} Loss-Funktion skaliert nicht auf viele Klassen.
+Letzter Klassifiezierungslayer ist Fully-Connected. Je mehr Image-Patches desto mehr Parameter.
+
+\cite{DoerschMultitaskSelfSupervisedVisual2017} benutzt Triplet-Loss.
+Der Verlust wird mit einem Positiv und einem Negativbeispiel berechnet.
+Die Idee dafür kommt von \citeauthor{Wang_2015_ICCV}.
+Die Kosinus-Ähnlichkeit misst den Winkel zwischen zwei Vektoren. Vektoren mit einem Winkel von 0 haben
+eine Kosinus-Maß von 1. Der größtmögliche Winkel hat eine Kosinusmaß von 0.
+
+
+
+
 \end{document}
