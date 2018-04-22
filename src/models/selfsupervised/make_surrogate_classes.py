@@ -11,6 +11,8 @@ import models.selfsupervised.discriminative as disc
 SOURCE_NAME = 'codices_all'
 size = 32
 original = 'original'
+n_surrogate_classes = 1000 #
+n_samples = 100
 
 def mean_gradient(bw):
     dx = bw[1:, :] - bw[:-1, :]
@@ -28,7 +30,8 @@ def task(env):
     crop = tile.RandCrop(int(size * math.sqrt(2)), random.Random('tiles'))
 
     n_class = 0
-    for idx in range(100):
+    # for idx in range(100):
+    while n_class < n_surrogate_classes:
         img = images[rnd.randint(0, len(images) - 1)]
         cropped = crop(img)
         arr = np.array(cropped)
@@ -37,9 +40,12 @@ def task(env):
         logging.debug('accept patch %f', mean_grad)
         if mean_grad  / 50 > rnd.random():
             cropped.save(save_folder / original /'{}.jpg'.format(n_class))
-            class_folder = save_folder / class_folder
-            save_transforms(class_folder, cropped)
             n_class += 1
+
+
+    for patch in (save_folder / original).glob('*.jpg'):
+        print(patch)
+
 
 def save_transforms(path, img):
     pass

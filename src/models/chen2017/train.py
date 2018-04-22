@@ -6,6 +6,9 @@ from pathlib import Path
 import torch
 import torchvision
 import torchvision.transforms as transforms
+
+from torch.utils.data import DataLoader
+
 from inferno.trainers.basic import Trainer
 from inferno.trainers.callbacks.logging.tensorboard import TensorboardLogger
 
@@ -25,6 +28,7 @@ std =56.83193208713197
 transform = transforms.Compose(
     [
         lambda img: img.convert('L'),
+        lambda img: img.resize((32, 32)),
         transforms.ToTensor(),
         transforms.Normalize((mean,), (std,))
     ])
@@ -32,20 +36,23 @@ transform = transforms.Compose(
 train_set = torchvision.datasets.ImageFolder(str(env.dataset('tile_img')),transform=transform)
 # train_set = array.Tiles(dataset_path, transforms=transform)
 test_set = tiles.Tiles(dataset_path, train=False, transforms=transform)
-train_loader = torch.utils.data.DataLoader(train_set, batch_size=32,
+train_loader = DataLoader(train_set, batch_size=32,
                                            shuffle=True, num_workers=2)
-test_loader = torch.utils.data.DataLoader(test_set, batch_size=512,
+test_loader = DataLoader(test_set, batch_size=512,
                                            shuffle=True, num_workers=2)
 
-model = Model(n_classes=64, in_channels=1, layers=2)
-exp = TrainLog(env, 'img_folder', model,log_time=True)
+# model = Model(n_classes=4, in_channels=1, layers=2)
+import models.selfsupervised.discriminative as dis
+model = dis.BaseNet(in_channels=1, n_classes=4)
+model.classify = True
+exp = TrainLog(env, 'img_folder', model.info ,log_time=True)
 logging.info(' saving  to %s', exp.save_directory)
 logging.info(' logging to %s', exp.log_directory)
 
 # Build trainer
 max_num_iterations = 10000
 trainer = Trainer(model) \
-    .build_criterion('NLLLoss') \
+    .build_criterion('CrossEntropyLoss') \
     .build_metric('CategoricalError') \
     .build_optimizer('Adam') \
     .save_every((1, 'epochs')) \
