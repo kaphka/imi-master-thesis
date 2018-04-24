@@ -44,82 +44,27 @@ Die komplete Erfassung kann nochmals teurer sein, da die Erfassung von Strukturd
 Im Digitalisierungsprojekt \emph{dünnhaupt digital} ist die Strukturdatenerfassung mit 40 Cent pro Seite der größte Ausgabenpunkt.
 \cite{OpitzWorkshopMassendigitalisierungsprojekteDeutschen2009} bemerkt auch, dass die Volltextgenerierung mittels OCR nicht für eine sinnvolle Onlinenutzung nicht ausreichend ist. Erst die Erfassung von Seitenstrukturen erlaubt  ``einen gezielten Zugriff auf  logische Texteinheinten'' \parencite[372]{OpitzWorkshopMassendigitalisierungsprojekteDeutschen2009}.
 
+\qq{Anforderungen an digitale Dokumente?}
 Gescannnte Dokumente ohne eine symbolische Kodierung laufen Gefahr irrelevant zu werden,
 da ihre Handhabung viel schlechter ist als die von ``purely digital information'' \parencite[10]{BairdDigitallibrariesdocument2003}.
  
-\qq{Anforderungen an digitale Dokumente?}
+\section{Datenrepresentation}
+
+Nichtdestotrotz sind enorm viele digitalisierte Dokumente im Internet verfügbar.
+Die größten Sammlungen sind unteranderem Google Books und das Internet Archive.
+Diese Sammlungen haben das Ziel möglichst viele Dokumente bereitzustellen. 
+Die Qualität kann dabei stark variieren.
+
+Andere Sammlungen beschränken sich auf einen klarer definierten Korpus und Digitalisierungsmethoden.
+
+Die digitalisierte Sammlungen der Staatsbibliothek zu Berlin \cite{StaatsbibliothekzuBerlinDigitalisierteSammlungenStaatsbibliothek2016} umfasst \research{?? Dokumente}.
+
+\research{Bach digital}
+
 
 \qq{Vereinheitlichung}
-
-\section{Dokumentensegmetierung}
-
+International Image Interoperability Framework \cite{IIIFInternationalImageInteroperability2018}
 
 
 \section{Schritte in der Verarbeitung von Dokumentenbildern}
 Die Dokumentensegmetierung ist ein Vorverarbeitungsschritt für weitere Schritte der Dokumentenverarbeitung.
-
-Im Bereich der Bibliotheswissenschaften besteht ein großes Interesse an Klassifizierung von
-Buchseiten zur besseren Erschließung.
-\cite{McConnaugheyLabeledSegmentationPrinted2017} klassifizieren Buchseiten anhand von textbasierten Features in 4 Kategorien. 
-Flow
-
-\section{Auswahl und Beschreibung der Datensätze}
-\textcite[985\psqq]{DoermannHandbookdocumentimage2014} listen 5 Aspekte die bei der Erstellung von Datensätzen zu beachten sind:
-Auswahl der Daten
-Datenbeschaffung
-Ground Truth Definition
-Ground Trouth Annotation
-Speicherformat
-Struktur und Organisation
-
-\section{DIVA-HisDB}
-Die DIVA \marginnote{\url{http://diuf.unifr.ch/main/diva/}} (Document, Image and Voice Analysis) Gruppe der Universität Fribourg hat im Kontext der Forschungsprojekte HisDoc und HisDoc 2.0 
-das Datenset DIVA-HisDB. erstellt.
-Die HisDoc-Projekte beschäftigen sich mit der automatischen Analyse von historischen Dokumenten und
-wie man diese für Historiker nutzbar machen kann.
-
-Für den Datensatz wurden Dokumente mit komplexen Layout aus der Virtuellen Manuskriptbibliothek der Schweiz (\url{http://www.e-codices.unifr.ch/en}) ausgesucht. Die Manuskripte enthalten neben dem Haupttext auch Randnotizen und Text-Dekorationen. Randnotizen befinden sich auch teilweise zwischen den Zeilen des Haupttexts.
- 
-DIVA-HisDB besteht aus 150 Dokumenten, aufgeteilt in Trainings-, Validierungs- und Testset (siehe \cref{table:hisdb_pages}. Hinzu kommen 30 Seiten die 
-für die finale Wertung des Wettbewerbs ``ICDAR2017 Competition on Layout Analysis for Challenging Medieval Manuscripts'' verwendet wurden.
-
-\input{chapters/dokumente/tab_diva_seiten}
-
-Die Manuskripte wurden mit einer Auflösung von 600 dpi gescannt und sind im  JPEG-Format gespeichert. 
-Die \cref{table:hisdbsamples} zeigt Beispiele aus den drei Datensätzen. 
-
-
-
-Der Datensatz wurde semi-automatisch mit 3 Annotation (Haupttext, Kommentare, Dekorationen) versehen.
-Diese Ground-Truth-Annotationen sind im PAGE-XML-Format und als ``pixel-label'' PNG-Bilder gespeichert.
-Die \cref{fig:ground_truth} zeigt eine Beispielseite mit den zugehörgine Labels auf Pixelebene. 
-
-\begin{figure*}
-    \centering
-    \caption{Hintergrund: weiss, Haupttext: blau, Kommentare: grün, Dekorationen: rot }
-    \label{fig:ground_truth}
-    \subfloat[Dokumentenbild]{%
-        \includegraphics[width=0.5\textwidth]{figures/datasets/gt_example0.jpeg}
-    }
-    \subfloat[``pixel-label'']{%
-        \includegraphics[width=0.5\textwidth]{figures/datasets/gt_example1.jpeg}
-    }
-\end{figure*}
-
-Die Menge an Pixeln pro Klasse ist sehr unterschiedlich.
-Die \cref{table:class_distribution} zeigt das in jedem Dokumentenset der Hintergrund deutlich überwiegt.
-
-\begin{table}
-    \caption{Verteilung der Klassen in Prozent\autocite[1362]{SimistiraICDAR2017CompetitionLayout2017}}
-    \label{table:class_distribution}
-    \begin{tabular}{lrrrr}
-        {\bfseries Set} & {\bfseries Hintergrund} & {\bfseries Kommentar} & {\bfseries Dekoration} & {\bfseries Text}\\
-        \csvreader[head to column names]{tables/diva_hisdb_class_distribution.csv}{}%
-        {\set&	\background & \comments & \decoration & \text \\}
-    \end{tabular}
-\end{table}
-
-
-
-\input{chapters/dokumente/tab_hisdb_samples}
-
