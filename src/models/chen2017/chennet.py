@@ -50,8 +50,8 @@ class ChenNet(nn.Module):
         self.out_dim = (out_channels-2) * ((tensor_width - layers * 2) ** 2)
 
         self.classifier = nn.Sequential(
-            self.dropout,
             nn.Linear(self.out_dim, 100),
+            nn.ReLU(inplace=True),
             self.dropout,
             nn.Linear(100, n_classes),
             nn.LogSoftmax(dim=1)
