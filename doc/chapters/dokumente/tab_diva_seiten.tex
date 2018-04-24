@@ -1,0 +1,9 @@
+\begin{table}
+    \caption{Aufteilung der Seiten des DIVA-HisDB-Datenssets}
+    \label{table:hisdb_pages}
+    \begin{tabular}{lccccc}
+        {\bfseries Name} & {\bfseries Auflösung} & {\bfseries Training} & {\bfseries Validierung} & {\bfseries Test} & {\bfseries Test ICDAR 2017)}\\
+        \csvreader[head to column names]{tables/diva_hisdb_specs.csv}{}%
+        {\name&	\width \(\times\)\height & \train	&\validate	&\test	&\comp\\}
+    \end{tabular}
+\end{table}

@@ -73,7 +73,7 @@ Speicherformat
 Struktur und Organisation
 
 \section{DIVA-HisDB}
-Die DIVA \marginnote{\url{http://diuf.unifr.ch/main/diva/}}(Document, Image and Voice Analysis) Gruppe der Universität Fribourg hat im Kontext der Forschungsprojekte HisDoc und HisDoc 2.0 
+Die DIVA \marginnote{\url{http://diuf.unifr.ch/main/diva/}} (Document, Image and Voice Analysis) Gruppe der Universität Fribourg hat im Kontext der Forschungsprojekte HisDoc und HisDoc 2.0 
 das Datenset DIVA-HisDB. erstellt.
 Die HisDoc-Projekte beschäftigen sich mit der automatischen Analyse von historischen Dokumenten und
 wie man diese für Historiker nutzbar machen kann.
@@ -83,17 +83,10 @@ Für den Datensatz wurden Dokumente mit komplexen Layout aus der Virtuellen Manu
 DIVA-HisDB besteht aus 150 Dokumenten, aufgeteilt in Trainings-, Validierungs- und Testset (siehe \cref{table:hisdb_pages}. Hinzu kommen 30 Seiten die 
 für die finale Wertung des Wettbewerbs ``ICDAR2017 Competition on Layout Analysis for Challenging Medieval Manuscripts'' verwendet wurden.
 
-\begin{table}
-    \caption{Aufteilung der Seiten des DIVA-HisDB-Datenssets}
-    \label{table:hisdb_pages}
-    \begin{tabular}{lccccc}
-        {\bfseries Name} & {\bfseries Auflösung} & {\bfseries Training} & {\bfseries Validierung} & {\bfseries Test} & {\bfseries Test ICDAR 2017)}\\
-        \csvreader[head to column names]{tables/diva_hisdb_specs.csv}{}%
-        {\name&	\width \(\times\)\height & \train	&\validate	&\test	&\comp\\}
-    \end{tabular}
-\end{table}
+\input{chapters/dokumente/tab_diva_seiten}
 
-Die Manuskripte wurden mit einer Auflösung von 600 dpi gescannt und sind im  JPEG-Format gespeichert. Die \cref{table:hisdbsamples} zeigt Beispiele aus den drei Datensätzen. 
+Die Manuskripte wurden mit einer Auflösung von 600 dpi gescannt und sind im  JPEG-Format gespeichert. 
+Die \cref{table:hisdbsamples} zeigt Beispiele aus den drei Datensätzen. 
 
 
 
@@ -105,10 +98,10 @@ Die \cref{fig:ground_truth} zeigt eine Beispielseite mit den zugehörgine Labels
     \centering
     \caption{Hintergrund: weiss, Haupttext: blau, Kommentare: grün, Dekorationen: rot }
     \label{fig:ground_truth}
-    \subfloat[Dokumentenbild]{
+    \subfloat[Dokumentenbild]{%
         \includegraphics[width=0.5\textwidth]{figures/datasets/gt_example0.jpeg}
     }
-    \subfloat[``pixel-label'' ]{
+    \subfloat[``pixel-label'']{%
         \includegraphics[width=0.5\textwidth]{figures/datasets/gt_example1.jpeg}
     }
 \end{figure*}
