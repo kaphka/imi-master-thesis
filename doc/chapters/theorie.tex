@@ -4,12 +4,12 @@
 Künstliche Neuronale Netzwerke (kurz NN) dominieren den Forschungsbereich der 
 Bilderkennung. 
 Besonders die Klasse der faltenden Neuronalen Netzwerks \engl{convolutional neural network}, kurz CNN, konnte viele Erfolge für sich beanspruchen.
-Rekordbrechende Ergebnisse bei der Klassifiziererung von handgeschriebenen Ziffern \parencite{LeCunBackpropagationappliedhandwritten1989} und des ImageNet-Wettbewerbs \parencite{KrizhevskyImageNetClassificationDeep2012} motivieren dazu CNN-Methoden auch in anderen
+Rekordbrechende Ergebnisse bei der Klassifizierung von handgeschriebenen Ziffern \parencite{LeCunBackpropagationappliedhandwritten1989} und des ImageNet-Wettbewerbs \parencite{KrizhevskyImageNetClassificationDeep2012} motivieren dazu CNN-Methoden auch in anderen
 Bereichen anzuwenden.
 
-\mfigure{Diziplinen im Bereich Neurale Netzwerke}{figures/tasks/nn_areas_venn.pdf}{fig:chen:cnn_task}
+\mfigure{Diziplinen im Bereich Neuronale Netzwerke}{figures/theorie/nn_areas_venn.pdf}{fig:chen:cnn_task}
 
-Neurale Netzwerke benötigen weniger Entwicklungsaufwand und können zudem einfacher von 
+Neuronale Netzwerke benötigen weniger Entwicklungsaufwand und können zudem einfacher von 
  wachsenden Rechenkapazitäten und Datenmengen gebrauch machen \parencite[436]{LeCunDeeplearning2015}. 
 Aber die Wissenschaft der NN ist ein Feld, dass durch die aktuelle Praxis mehr als durch Theorie geprägt ist. 
 Das bedeuted zum einen das theoretische Grundlagen noch nicht gefestigt sind.
@@ -19,15 +19,17 @@ Je mehr Parameter unklar sind desto schwieriger wird eine Reproduktion.
 Die Reproduktion von Ergebnissen ist aber ein wichtiger Bestandteil in jedem Forschungsgebiet. 
 
 \section{Maschinelles Lernen}
-Neurale Netwerke und CNN sind Beispiele für Machinenlernalgorithmen \engl{maschine learning algorithms}.
-\cite{MitchellMachinelearning1997} definiert einen Machinenlernalgorithmus wie folgt: ``A computer program is said to learn from experience E with respect to some class of tasks T and perfomance measure P, if its performance at tasks T, as measured by P improves with experience E''.
+Neuronale Netzwerke und CNN sind Beispiele für Maschinenlernalgorithmen \engl{maschine learning algorithms}.
+\cite{MitchellMachinelearning1997} definiert einen Maschinenlernalgorithmus wie folgt: ``A computer program is said to learn from experience E with respect to some class of tasks T and perfomance measure P, if its performance at tasks T, as measured by P improves with experience E''.
 
 % experience E 
 Die Erfahrung E kann zum Beispiel ein Datensatz \(X\) mit zugehörigen Klassen
-\(Y\) sein. Im Fall der Dokumentensegmentierung kann ein Element \(x_i\) ein Bildauschnitt sein, 
+\(Y\) sein. 
+Im Fall der Dokumentensegmentierung kann ein Element \(x_i\) ein Bildauschnitt sein, 
 dessen Kategorisierung ist dann das Label \(y_i\)(siehe \cref{fig:chen:cnn_task}).
 
-\mfigure{Bildauschnitt mit ground ground truh (0: Hintergrund, 3: Haupttext)}{figures/tasks/chen_examples.pdf}{fig:chen:cnn_task}
+
+
 
 % Task T 
 Die Aufgabe T ist in den meisten Fällen eine statistische Modellierung.
@@ -39,8 +41,9 @@ Beispiele für unüberwachte Algorithmen sind der k-Means-Algorithmus oder der P
 Bei überwachten Lernalgorithmen wird versucht die Wahrscheinlichkeitsverteilung \(p(y | x)\) implizit zu ``lernen''.
 Der Lernalgorithmus soll dabei eine Funktion finden \(f: \mathds{R}^n \rightarrow \left\{1,\dots,k \right\} \) so das \(y = f\left(x\right)\) \parencite[97 ff]{GoodfellowDeeplearning2016}.
 Ein Lernalgorithmus der diese Funktion findet ist ein überwachter Lernalgorithmus \engl{supervised learning algorithm}
-Die Trennung zwischen überwacht und unüberwacht ist nur eine grobe Einteilung. Tätsächlich sind die übergänge fließend. 
-Manche Machinenlernverfahren benutzen beide Methoden.  
+Die Trennung zwischen überwacht und unüberwacht ist nur eine grobe Einteilung. 
+Tatsächlich sind die Übergänge fließend. 
+Manche Maschinenlernverfahren benutzen beide Methoden.  
 
 % perfrmance P
 Die Performanz P der Vorhersagefunktion \(f\) wird im einfachsten Fall mit der Genauigkeit,
@@ -59,10 +62,22 @@ dem Verhähltniss von richtigen Vorhersage zu Falschen, gemessen.
 \end{table}    
 \section{Künstliche Neuronale Netzwerke}
 
-Künstliche Neurale Netwerke \kurz{KNN} sind eine Modellierungsmethode des statistischen Lernens, die von der Natur inspiriert wurde. 
-Das Neuron ist der Grundbaustein eines Netwerkes und verarbeitet eingehende Signale. 
+Künstliche Neuronale Netzwerke \kurz{KNN} sind eine Modellierungsmethode des statistischen Lernens, die von der Natur inspiriert wurde. 
+Das Neuron ist der Grundbaustein eines Netzwerkes und verarbeitet eingehende Signale. 
 Ein KNN besteht meistens aus zwei Teilen: einer linearen Funktion über die Eingabesignale und 
 einer nicht-linearen Aktivierungsfunktion.
+
+Zur besseren Erläuterung der Theorie soll hier ein Teilproblem der Dokumentensegmentierung dienen.
+In diesem Fall besteht der Datensatz \(X\) aus Bildausschnitten die im Bildzentrum Text enthalten.
+Wenn ein Element \(x_i\) Text enthählt, dann ist das \(y_i = 1\) andernfalls \(0\).
+
+\sfigure{Bildauschnitte mit und ohne Textinhalt}{figures/chen/cnn_task.pdf}%{fig:chen:cnn_task}
+
+
+
+\begin{align}
+    f \left(\raisebox{-.5\height}{\includegraphics{figures/chen/text_tile.pdf}}\right) = 1
+\end{align}
 
 Das einfachste Beispiel ist die Klasse der vollvernetzen KNN. 
 Jedes Element in einem Eingangssignalvektor \(x\) wird mit einem Parameter aus dem Gewichtsvektor \(w\) verechnet. Dazu kommt der Biaswert \(b\).
@@ -79,7 +94,6 @@ Jedes Element in einem Eingangssignalvektor \(x\) wird mit einem Parameter aus d
 Target als nonlineare Funktion dieser Features modelieren.  
 
 
-\section{SGD}
 
 \section{Aktivierungsfunktionen}
 \begin{align}
@@ -98,8 +112,8 @@ Target als nonlineare Funktion dieser Features modelieren.
 \subsection{Softmax}
 
 
+\section{SGD}
 \section{Xavier initialization}
-
 \section{Regularisierung}
 \label{sec:Regularisierung}
 \section{Weight decay}
@@ -134,18 +148,18 @@ Im Bereich der Bilderverarbeitung wird schon länger eine abgeänderte Faltungsf
 \end{align}
 
 
-Ein CNN ist eine Neurales Netzwerk, dass in mindesten einen Layer die Faltung anstatt der normalen Matrixmultiplikation verwendet \parencite[321]{GoodfellowDeeplearning2016}.
+Ein CNN ist eine Neuronales Netzwerk, dass in mindesten einen Layer die Faltung anstatt der normalen Matrixmultiplikation verwendet \parencite[321]{GoodfellowDeeplearning2016}.
 \qq{Drei Hauptvorteile?}
 \cite{GoodfellowDeeplearning2016} sieht drei Vorteile von CNN gegenüber voll-vernetzten NN: verringerte Konnektivität, 
 gemeinsame Parameternutzung, eqivariante Darstellung.
-Wie schon erwahnt steigt die Anzahl der Parameter in einem voll-vernetzten NN je größer der Input wird, weil jedes Neuron mit jeder Aktivierung der vorhergehenden Schicht verbunden ist. 
-Durch die Faltungssoperation erhählt jedes Neuron nur die Signale die im Bereich des Filterkernels liegen. Dieser Bereich wird auch rezeptives Feld genannnt.
+Wie schon erwähnt steigt die Anzahl der Parameter in einem voll-vernetzten NN je größer der Input wird, weil jedes Neuron mit jeder Aktivierung der vorhergehenden Schicht verbunden ist. 
+Durch die Faltungsoperation erhählt jedes Neuron nur die Signale die im Bereich des Filterkernels liegen. Dieser Bereich wird auch rezeptives Feld genannnt.
 Durch die Schichtung von mehreren Faltungen vergrößert sich das rezeptive Feld der Neuronen in tieferen Schichten (siehe \cref{fig:cnn_neurons}).
 
 
 \begin{marginfigure}
     \label{fig:cnn_neurons}
-    \includegraphics[width=\textwidth]{figures/sketch/cnn/perceptive_field.pdf}
+    \includegraphics[width=\textwidth]{figures/theorie/perceptive_field.pdf}
     \caption{Rezeptives Feld in einem mehrschichtigen Netz}
 \end{marginfigure}
 
@@ -167,7 +181,7 @@ Das Distanzmaß \(D_s\) zu den Clusterzentren \(k=[1,K]\) basiert auf den Farbab
     D_{s}   &= d_{lab} + \frac{m}{S} d_{xy}
 \end{align}
 
-Der Faktor \(m\) ermöglicht eine Gewichtung den zwei Distanzmaßen. Je höher
-der Faktor desto kompakter werden die Superpixel. \cref{fig:slic_parameters}
+Der Faktor \(m\) ermöglicht eine Gewichtung der zwei Distanzmaße. 
+Je höher der Faktor desto kompakter werden die Superpixel. \cref{fig:slic_parameters}
 zeigt das Ergebniss des Algorithmus mit unterschiedlichen Parameter  \(m\)
 angewendet auf eine Dokumentenseite.
