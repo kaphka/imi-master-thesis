@@ -1,2 +1,2 @@
-ag --tex -l | entr -s 'echo `date +%s` `detex thesis.tex| wc -w` >> ~/Sync/log/pdf/pdflog.txt'
+ag -g pdf | entr -s 'echo `date +%s` `pdftotext thesis.pdf - | wc -w` >> ~/Sync/log/pdf/pdflog.txt'
 

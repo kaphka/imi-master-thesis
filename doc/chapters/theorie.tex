@@ -1,4 +1,5 @@
 \chapter{Theoretische Grundlagen}
+\label{chap:theorie}
 \qq{Warum NN?}
 Künstliche Neuronale Netzwerke (kurz NN) dominieren den Forschungsbereich der 
 Bilderkennung. 
@@ -6,11 +7,8 @@ Besonders die Klasse der faltenden Neuronalen Netzwerks \engl{convolutional neur
 Rekordbrechende Ergebnisse bei der Klassifiziererung von handgeschriebenen Ziffern \parencite{LeCunBackpropagationappliedhandwritten1989} und des ImageNet-Wettbewerbs \parencite{KrizhevskyImageNetClassificationDeep2012} motivieren dazu CNN-Methoden auch in anderen
 Bereichen anzuwenden.
 
-\begin{marginfigure}
-    \includegraphics[width=\textwidth]{figures/tasks/nn_areas_venn.pdf}
-    \caption{Diziplinen im Bereich Neurale Netzwerke}
-    \label{fig:chen:cnn_task}
-\end{marginfigure}
+\mfigure{Diziplinen im Bereich Neurale Netzwerke}{figures/tasks/nn_areas_venn.pdf}{fig:chen:cnn_task}
+
 Neurale Netzwerke benötigen weniger Entwicklungsaufwand und können zudem einfacher von 
  wachsenden Rechenkapazitäten und Datenmengen gebrauch machen \parencite[436]{LeCunDeeplearning2015}. 
 Aber die Wissenschaft der NN ist ein Feld, dass durch die aktuelle Praxis mehr als durch Theorie geprägt ist. 
@@ -28,11 +26,8 @@ Neurale Netwerke und CNN sind Beispiele für Machinenlernalgorithmen \engl{masch
 Die Erfahrung E kann zum Beispiel ein Datensatz \(X\) mit zugehörigen Klassen
 \(Y\) sein. Im Fall der Dokumentensegmentierung kann ein Element \(x_i\) ein Bildauschnitt sein, 
 dessen Kategorisierung ist dann das Label \(y_i\)(siehe \cref{fig:chen:cnn_task}).
-\begin{marginfigure}
-    \includegraphics[width=\textwidth]{figures/tasks/chen_examples.pdf}
-    \caption{Bildauschnitt mit ground ground truh (0: Hintergrund, 3: Haupttext)}
-    \label{fig:chen:cnn_task}
-\end{marginfigure}
+
+\mfigure{Bildauschnitt mit ground ground truh (0: Hintergrund, 3: Haupttext)}{figures/tasks/chen_examples.pdf}{fig:chen:cnn_task}
 
 % Task T 
 Die Aufgabe T ist in den meisten Fällen eine statistische Modellierung.

@@ -2,6 +2,29 @@
 \label{chap:reproduktion}
 \epigraph{What I cannot create, I do not understand}{--- Richard Feyman}
 
+\qq{welche Experimente?}
+Ziel 
+Im folgenden werden Paper genauer untersucht, die sich mit dem Problem der Dokumentensegmentierung mit Hilfe von CNNs nähern.
+Das erste Experiment basiert auf dem neusten Paper von Mitgliedern der DIVA-Gruppe: \citeauthor*{ChenConvolutionalNeuralNetworks2017}. 
+
+Das zweite Experiment basiert auf der Forschung des Gewinners des IDCAR2017-Wettbewerbs: \citeauthor*{XuPageSegmentationHistorical2017} 
+
+Beide Untersuchungen benutzen den gleichen Datensatz als Grundlage für ihre Experimente. 
+\section{Andere Ansätze}
+\cite{WickFullyConvolutionalNeural2017}
+Im Bereich der Bibliotheswissenschaften besteht ein großes Interesse an Klassifizierung von
+Buchseiten zur besseren Erschließung.
+\cite{McConnaugheyLabeledSegmentationPrinted2017} klassifizieren Buchseiten anhand von textbasierten Features in 4 Kategorien. 
+
+
+% Kontext/prior work
+% Prozessbeschreibung
+% Vorverarbeitung
+% Netzarchitektur
+% Training 
+% Nachverarbeitung
+
+
 \section{Datensatz}
 
 \section{Auswahl und Beschreibung des Datensatzes}
@@ -33,7 +56,7 @@ Randnotizen befinden sich auch teilweise zwischen den Zeilen des Haupttexts.
 DIVA-HisDB besteht aus 150 Dokumenten, aufgeteilt in Trainings-, Validierungs- und Testset (siehe \cref{table:hisdb_pages}. 
 Hinzu kommen 30 Seiten die für die finale Wertung des Wettbewerbs ``ICDAR2017 Competition on Layout Analysis for Challenging Medieval Manuscripts'' verwendet wurden.
 
-\input{chapters/dokumente/tab_diva_seiten}
+\input{reproduktion/tab_diva_seiten}
 % Datenbeschaffung
 Alle Daten können direkt von der Webseite der DIVA-Gruppe heruntergeladen werden.
 
@@ -76,31 +99,9 @@ Die \cref{table:class_distribution} zeigt das in jedem Dokumentenset der Hinterg
 
 
 
-\input{chapters/dokumente/tab_hisdb_samples}
+\input{reproduktion/tab_hisdb_samples}
 
-
-
-\qq{welche Experimente?}
-Im folgenden werden Paper genauer untersucht, die sich mit dem Problem der Dokumentensegmentierung mit Hilfe von CNNs nähern.
-Das erste Experiment basiert auf dem neusten Paper von Mitgliedern der DIVA-Gruppe: \citeauthor*{ChenConvolutionalNeuralNetworks2017}. 
-
-Das zweite Experiment basiert auf der Forschung des Gewinners des IDCAR2017-Wettbewerbs: \citeauthor*{XuPageSegmentationHistorical2017} 
-
-\section{Andere Ansätze}
-\cite{WickFullyConvolutionalNeural2017}
-Im Bereich der Bibliotheswissenschaften besteht ein großes Interesse an Klassifizierung von
-Buchseiten zur besseren Erschließung.
-\cite{McConnaugheyLabeledSegmentationPrinted2017} klassifizieren Buchseiten anhand von textbasierten Features in 4 Kategorien. 
-
-
-% Kontext/prior work
-% Prozessbeschreibung
-% Vorverarbeitung
-% Netzarchitektur
-% Training 
-% Nachverarbeitung
-
-\input{chapters/reproduktion/chen}
-\input{chapters/reproduktion/xu}
+\subimport{reproduktion/}{chen}
+\input{reproduktion/xu}
 
 \section{Ergebnisse}

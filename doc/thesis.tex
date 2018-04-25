@@ -23,6 +23,7 @@
 \input{include/tuftefix}
 \usepackage[export]{adjustbox}
 \usepackage[caption=false]{subfig}
+\usepackage{import}
 
 \usepackage{blindtext}
 
@@ -87,6 +88,14 @@
     \caption{#1}
     \end{figure}
 }
+\newcommand{\mfigure}[3]{
+    \begin{marginfigure}
+        \includegraphics[width=\textwidth]{#2}
+        \caption{#1}
+        \label{#3}
+    \end{marginfigure}
+}
+
 \newcommand{\qq}[1]{
     \marginnote{{\color{signal}#1}}
 }
@@ -100,6 +109,7 @@
 % \maketitle
 \include{titlepage}
 \tableofcontents
+\vfill
 \pagebreak
 \input{main}
 
