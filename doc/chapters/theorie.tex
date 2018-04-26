@@ -73,10 +73,14 @@ Wenn ein Element \(x_i\) Text enthählt, dann ist das \(y_i = 1\) andernfalls \(
 
 \sfigure{Bildauschnitte mit und ohne Textinhalt}{figures/chen/cnn_task.pdf}%{fig:chen:cnn_task}
 
-
-
 \begin{align}
     f \left(\raisebox{-.5\height}{\includegraphics{figures/chen/text_tile.pdf}}\right) = 1
+\end{align}
+
+Wir wollen eine Funktion finden, die mit hoher Wahrscheinlichkeit eine Vorhersage 
+
+\begin{align}
+    \theta_{ML} = \argmax_{\theta} P(Y | X, \theta)
 \end{align}
 
 Das einfachste Beispiel ist die Klasse der vollvernetzen KNN. 
@@ -116,9 +120,21 @@ Target als nonlineare Funktion dieser Features modelieren.
 \section{Xavier initialization}
 \section{Regularisierung}
 \label{sec:Regularisierung}
-\section{Weight decay}
-\section{Dropout}
+Durch SGD und in kleinen Datensets ensteht Samplingrauschen \engl{sampling noise}. 
+Eine kleine Auswahl von Beispielen kann Zusammenhänge enthalten, 
+die nicht in der tatsächlichen Verteilung der Daten vorhanden ist.
+Regularisierung können helfen eine Überanpassung des Models zu verhindern.
+\subsection{Dropout}
 
+Dropout ist eine Regularisierungsmethode für Neuronale Netzwerke, 
+die versucht durch zufälliges Ausschalten einzelner Aktivierungen koadaptionen zu verhindern.
+
+Während einer Trainingsiteration wird ein Element mit einer Wahrscheinlichkeit \(p\) ausgeschaltet (Aktivierung gleich 0).
+Dadurch wird bei jedem Trainingsschritt ein anderes Modell trainiert. 
+In der Testphase werden die Gewichte mit \(p\) skaliert. 
+
+Netzwerke mit Dropout generalisieren besser auf noch nicht gesehene Daten.
+\subsection{Weight decay}
 
 
 \section{CNN}
