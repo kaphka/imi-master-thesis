@@ -185,6 +185,13 @@ Durch die Schichtung von mehreren Faltungen vergrößert sich das rezeptive Feld
 
 
 \section{Vorverarbeitung}
+Für die Verarbeitung von Dokumentenseiten werden meistens noch weitere Algorithmen eingesetz um Klassifizierung und Segmentierung zu erleichtern. 
+Da wir nur an Inhalten interessiert sind die auf ein Medium aufgetragen wurden (z.B. Tinte auf Papier) ist eine Binarisierung des Bildes ein hilfreicher Schritt. 
+Eine Binarisierungsfunktion soll Werte der bildgebenden Funktion auf zwei Werte, 
+jeweils für Vorder- und Hintergrund, abbilden
+\(bin(I): f: i \in \left\{0 \dots 255\right\} \rightarrow b \in \right\{0, 1\right\} \)
+
+Dokumentenbilder haben zudem oft eine sehr hohe Auflösung und enthalten Prozentual nur wenig Vordergrundpixel.
 
 \section{SLIC Superpixel}
 Der SLIC-Algorithmus basiert auf dem k-Means-Algorithmus und teilt Pixel inhalb eines 5D-Raums in Cluster ein. 
