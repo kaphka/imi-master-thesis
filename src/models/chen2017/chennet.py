@@ -12,7 +12,7 @@ import torch.nn.functional as F
 import torch.optim as optim
 import torchvision
 import torchvision.transforms as transforms
-
+import experiment.info as info
 
 class ChenNet(nn.Module):
     def init_weights(self,m):
@@ -31,7 +31,7 @@ class ChenNet(nn.Module):
 
     def __init__(self, n_classes=2, kernels=4, layers=1, max_pool_size=0, in_channels=1, tensor_width=28):
         super(ChenNet, self).__init__()
-        self._log_name = 'ChenNet'
+        self.info = info.LogInfo('ChenNet')
         self.n_conv_layers = layers
         self.n_kernels = kernels
         self.max_pool_size = max_pool_size

@@ -8,7 +8,10 @@ import random
 from experiment.data import Environment
 import logging
 
+from data.metrics import mean_gradient
+
 TILE_SET_NAME = 'tiles'
+MIN_GRAD = 30
 
 def combine(dataset, path, split='train', balance=False):
     x_train = None
@@ -70,7 +73,7 @@ def create_tile_img_set(path, dataset, crop, img_transforms, filters, names ):
                 pass
 
 class RandCrop():
-    def __init__(self, size, rnd):
+    def __init__(self, size, rnd=random.Random()):
         self.size = size
         self.rnd = rnd
 
@@ -103,3 +106,15 @@ class ImgTiles(td.Dataset):
         img = Image.open(self.img_paths[item])
         gt  = Image.open(self.gt_paths[item])
         return img, gt
+
+
+
+def document_to_tile(dataset, path, size=255, use_grad_propabilty=False, crops_per_page=10):
+    for idx in range(len(dataset)):
+        img, _ = dataset[idx]
+        crop = RandCrop(size)
+        for idxcrop in range(crops_per_page):
+            cropped = crop(img)
+            grad  = mean_gradient(np.array(cropped.convert('L')))
+            if grad > MIN_GRAD:
+                cropped.save(path / 'img_{}_{}.jpg'.format(idx, idxcrop))

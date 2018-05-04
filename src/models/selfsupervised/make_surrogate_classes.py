@@ -7,6 +7,7 @@ from PIL import Image
 import numpy as np
 import math
 import models.selfsupervised.discriminative as disc
+from data.metrics import mean_gradient
 
 SOURCE_NAME = 'codices_all'
 size = 32
@@ -14,11 +15,7 @@ original = 'original'
 n_surrogate_classes = 1000 #
 n_samples = 100
 
-def mean_gradient(bw):
-    dx = bw[1:, :] - bw[:-1, :]
-    dy = bw[:, 1:] - bw[:, :-1]
-    grad = np.add(np.power(dx[:, :-1], 2), np.power(dy[:-1, :], 2))
-    return np.mean(grad)
+
 
 def task(env):
     dataset = diva.HisDBDataset(env.dataset(SOURCE_NAME))
